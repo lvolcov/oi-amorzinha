@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>oi amorzinha — livro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F0; --paper:#FFFDF8; --ink:#1A1A1A; --text:#2B2B2B;
+  --accent:#E63946; --accent2:#F4A259; --tape:rgba(244,162,89,.5);
+  --line:rgba(26,26,26,.18);
+  --hand:'Caveat',cursive; --body:'Nunito',sans-serif;
+}
+body[data-theme="dark"]{
+  --bg:#1E2A3A; --paper:#26344A; --ink:#F5EBDD; --text:#EFE7DA;
+  --accent:#FF5964; --accent2:#F2C14E; --tape:rgba(242,193,78,.45);
+  --line:rgba(245,235,221,.22);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--body);
+  transition:background .5s ease,color .5s ease}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  opacity:.04;background-image:radial-gradient(var(--ink) .5px,transparent .5px);
+  background-size:7px 7px}
+
+/* floating hearts layer */
+.floaters{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.floaters svg{position:absolute;fill:var(--accent);opacity:.13;
+  animation:drift linear infinite}
+@keyframes drift{0%{transform:translateY(20px) rotate(-8deg)}
+  50%{transform:translateY(-20px) rotate(8deg)}100%{transform:translateY(20px) rotate(-8deg)}}
+
+/* horizontal track */
+.track{position:relative;z-index:2;display:flex;height:100%;
+  overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.panel{position:relative;min-width:100vw;height:100%;scroll-snap-align:center;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:80px 26px 120px}
+.panel .inner{max-width:520px;width:100%}
+
+.kicker{font-family:var(--hand);color:var(--accent);font-size:26px;font-weight:700}
+h1{font-family:var(--hand);font-weight:700;color:var(--ink);
+  font-size:clamp(60px,22vw,120px);line-height:.88}
+.amp{color:var(--accent);display:inline-block;transform:rotate(-8deg)}
+.sub{font-family:var(--hand);font-size:clamp(22px,7vw,32px);color:var(--accent);margin-top:4px}
+.place{font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-top:22px;opacity:.7}
+h2{font-family:var(--hand);color:var(--ink);font-size:clamp(38px,11vw,58px);
+  font-weight:700;line-height:.95;margin:2px 0 12px}
+p.body{font-size:17px;max-width:34ch;margin:0 auto}
+
+.photo{background:var(--paper);padding:12px 12px 44px;border-radius:3px;
+  box-shadow:0 10px 26px rgba(0,0,0,.16);margin:22px auto 0;position:relative;
+  width:min(84%,300px);transform:rotate(-2deg)}
+.photo:nth-child(even){transform:rotate(2deg)}
+.photo .ph{display:block;width:100%;height:180px;border-radius:2px;
+  background:linear-gradient(135deg,var(--accent2),var(--accent));filter:saturate(.92)}
+.photo .cap{font-family:var(--hand);font-size:21px;color:var(--ink);
+  position:absolute;left:0;right:0;bottom:10px}
+.photo::before{content:"";position:absolute;top:-12px;left:50%;width:90px;height:24px;
+  transform:translateX(-50%) rotate(-3deg);background:var(--tape)}
+
+/* self-drawing doodles */
+.doodle{display:block;margin:16px auto 0;overflow:visible}
+.doodle path,.doodle polyline{fill:none;stroke:var(--accent);stroke-width:4;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:stroke-dashoffset 1.2s ease .15s}
+.doodle.ink path,.doodle.ink polyline{stroke:var(--ink)}
+/* reveal per panel */
+.panel .inner>*{opacity:0;transform:translateY(18px);
+  transition:opacity .6s ease,transform .6s ease}
+.panel.in .inner>*{opacity:1;transform:none}
+.panel.in .inner>*:nth-child(2){transition-delay:.08s}
+.panel.in .inner>*:nth-child(3){transition-delay:.16s}
+.panel.in .inner>*:nth-child(4){transition-delay:.24s}
+.panel.in .doodle path,.panel.in .doodle polyline{stroke-dashoffset:0!important}
+.heartbeat{animation:beat 1.4s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.12)}30%{transform:scale(1)}}
+
+/* journey line at bottom */
+.journey{position:fixed;left:0;right:0;bottom:46px;height:40px;z-index:5;
+  pointer-events:none;padding:0 26px}
+.jline{position:relative;height:2px;top:19px;
+  background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 16px)}
+.jfill{position:absolute;left:0;top:0;height:100%;width:0;
+  background:var(--accent);transition:width .25s ease;border-radius:2px}
+.jheart{position:absolute;top:-11px;left:0;width:24px;height:24px;
+  fill:var(--accent);transition:left .25s ease;transform:translateX(-50%)}
+
+/* controls */
+.top{position:fixed;top:0;left:0;right:0;z-index:8;display:flex;
+  justify-content:space-between;align-items:center;padding:14px 18px;
+  padding-top:max(14px,env(safe-area-inset-top))}
+.brand{font-family:var(--hand);font-size:24px;color:var(--ink);opacity:.85}
+.toggle{pointer-events:auto;border:1.6px solid var(--line);background:transparent;
+  color:var(--ink);font-family:var(--body);font-size:13px;font-weight:700;
+  border-radius:30px;padding:7px 14px;cursor:pointer;display:flex;gap:6px;align-items:center}
+.dots{position:fixed;bottom:14px;left:0;right:0;z-index:8;display:flex;gap:7px;
+  justify-content:center;pointer-events:none}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--line);transition:all .3s}
+.dot.on{background:var(--accent);width:20px;border-radius:6px}
+.arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:8;
+  width:44px;height:44px;border-radius:50%;border:1.6px solid var(--line);
+  background:color-mix(in srgb,var(--bg) 80%,transparent);color:var(--ink);
+  font-size:22px;cursor:pointer;display:none}
+.arrow.l{left:12px} .arrow.r{right:12px}
+@media(hover:hover) and (min-width:720px){.arrow{display:block}}
+.hint{position:fixed;bottom:96px;left:0;right:0;text-align:center;z-index:6;
+  font-family:var(--hand);font-size:20px;color:var(--accent);opacity:.8;
+  animation:nudge 1.8s ease-in-out infinite;pointer-events:none}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(10px)}}
+.home{position:fixed;left:18px;bottom:44px;z-index:8;font-size:13px;
+  color:var(--text);opacity:.5;text-decoration:none}
+</style>
+</head>
+<body data-theme="caderninho">
+
+<div class="floaters" id="floaters"></div>
+
+<div class="top">
+  <div class="brand">oi amorzinha</div>
+  <button class="toggle" id="toggle">🌙 <span>modo noite</span></button>
+</div>
+
+<button class="arrow l" id="prev">‹</button>
+<button class="arrow r" id="next">›</button>
+
+<div class="track" id="track">
+
+  <section class="panel"><div class="inner">
+    <h1>Lucas<span class="amp"> &amp; </span>Talita</h1>
+    <div class="sub">a nossa história, página por página</div>
+    <svg class="doodle" width="220" height="30" viewBox="0 0 220 30"><path d="M5 20 C 60 5,160 5,215 18"/></svg>
+    <div class="place">Manchester · 2026</div>
+  </div></section>
+
+  <section class="panel"><div class="inner">
+    <div class="kicker">página um</div>
+    <h2>o nosso início</h2>
+    <p class="body">Um match no Bumble e umas conversas que não queriam acabar.</p>
+    <svg class="doodle ink" width="160" height="46" viewBox="0 0 160 46"><path d="M8 34 C 34 10,74 10,96 30 M96 30 l-13 -3 M96 30 l-3 -13"/></svg>
+  </div></section>
+
+  <section class="panel"><div class="inner">
+    <div class="kicker">página dois</div>
+    <h2>o primeiro date</h2>
+    <p class="body">O friozinho na barriga, e aquele papo que rendeu a noite toda.</p>
+    <div class="photo"><div class="ph"></div><div class="cap">nós dois, dia um</div></div>
+  </div></section>
+
+  <section class="panel"><div class="inner">
+    <div class="kicker">página três</div>
+    <h2>o segundo date</h2>
+    <p class="body">Foi aqui que a gente se conheceu de verdade.</p>
+    <svg class="doodle heartbeat" width="110" height="100" viewBox="0 0 100 90"><path d="M50 82 C 10 55,8 20,30 14 C 44 10,50 24,50 30 C 50 24,56 10,70 14 C 92 20,90 55,50 82 Z"/></svg>
+  </div></section>
+
+  <section class="panel"><div class="inner">
+    <div class="kicker">página quatro</div>
+    <h2>Budapeste</h2>
+    <p class="body">Na semana seguinte a gente já marcou a primeira viagem. Corajosos — e deu certíssimo.</p>
+    <div class="photo"><div class="ph"></div><div class="cap">✈ nossa primeira viagem</div></div>
+  </div></section>
+
+  <section class="panel"><div class="inner">
+    <div class="kicker">página cinco</div>
+    <h2>Portugal</h2>
+    <p class="body">Mais um lugar, mais um pedaço nosso no mapa.</p>
+    <svg class="doodle" width="150" height="46" viewBox="0 0 150 46"><path d="M8 36 C 30 14,52 14,64 34 C 74 14,98 14,110 34"/></svg>
+  </div></section>
+
+  <section class="panel"><div class="inner">
+    <div class="kicker">página seis</div>
+    <h2>Madri</h2>
+    <p class="body">O aniversário dela, comigo. Eu não trocaria por nada.</p>
+    <svg class="doodle" width="140" height="60" viewBox="0 0 140 60"><path d="M118 18 l4 8 l9 1 l-6 6 l2 9 l-8 -4 l-8 4 l2 -9 l-6 -6 l9 -1 z"/><path d="M10 42 C 30 22,50 22,60 40 C 68 22,90 22,100 40"/></svg>
+  </div></section>
+
+  <section class="panel"><div class="inner">
+    <div class="kicker">e assim vai…</div>
+    <h2>a vida em Manchester</h2>
+    <p class="body">Tantos momentos que ainda cabem aqui — e agora, o nosso lar.</p>
+    <svg class="doodle heartbeat" width="100" height="92" viewBox="0 0 100 90"><path d="M50 82 C 10 55,8 20,30 14 C 44 10,50 24,50 30 C 50 24,56 10,70 14 C 92 20,90 55,50 82 Z"/></svg>
+  </div></section>
+
+  <section class="panel"><div class="inner">
+    <svg class="doodle heartbeat" width="130" height="120" viewBox="0 0 100 90"><path d="M50 82 C 10 55,8 20,30 14 C 44 10,50 24,50 30 C 50 24,56 10,70 14 C 92 20,90 55,50 82 Z"/></svg>
+    <h2>pra sempre</h2>
+    <div class="sub">— Lucas &amp; Talita</div>
+  </div></section>
+
+</div>
+
+<div class="hint" id="hint">deslize →</div>
+
+<div class="journey">
+  <div class="jline"><div class="jfill" id="jfill"></div></div>
+  <svg class="jheart" id="jheart" viewBox="0 0 100 90"><path d="M50 82 C 10 55,8 20,30 14 C 44 10,50 24,50 30 C 50 24,56 10,70 14 C 92 20,90 55,50 82 Z"/></svg>
+</div>
+
+<div class="dots" id="dots"></div>
+<a class="home" href="index.html">‹ galeria</a>
+
+<script>
+const track=document.getElementById('track');
+const panels=[...document.querySelectorAll('.panel')];
+
+// dash length for each doodle so it draws in
+document.querySelectorAll('.doodle path,.doodle polyline').forEach(p=>{
+  const L=p.getTotalLength(); p.style.strokeDasharray=L; p.style.strokeDashoffset=L;
+});
+
+// dots
+const dots=document.getElementById('dots');
+panels.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i?'':' on');dots.appendChild(d);});
+const dotEls=[...dots.children];
+
+// reveal panels as they enter (horizontal)
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting) e.target.classList.add('in');
+}),{root:track,threshold:.55});
+panels.forEach(p=>io.observe(p));
+
+// floating hearts
+const F=document.getElementById('floaters');
+const heartPath='M50 82 C 10 55,8 20,30 14 C 44 10,50 24,50 30 C 50 24,56 10,70 14 C 92 20,90 55,50 82 Z';
+for(let i=0;i<9;i++){
+  const s=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  s.setAttribute('viewBox','0 0 100 90');
+  const sz=14+Math.random()*30; s.style.width=sz+'px'; s.style.height=sz+'px';
+  s.style.left=Math.random()*96+'vw'; s.style.top=Math.random()*88+'vh';
+  s.style.animationDuration=(6+Math.random()*7)+'s';
+  s.style.animationDelay=(-Math.random()*7)+'s';
+  s.innerHTML='<path d="'+heartPath+'"/>'; F.appendChild(s);
+}
+
+// journey line + traveling heart tied to horizontal scroll
+const jfill=document.getElementById('jfill'), jheart=document.getElementById('jheart');
+const hint=document.getElementById('hint');
+function onScroll(){
+  const max=track.scrollWidth-track.clientWidth;
+  const p=max>0?track.scrollLeft/max:0;
+  jfill.style.width=(p*100)+'%';
+  jheart.style.left=(p*100)+'%';
+  if(track.scrollLeft>40) hint.style.opacity='0';
+  const idx=Math.round(track.scrollLeft/track.clientWidth);
+  dotEls.forEach((d,i)=>d.classList.toggle('on',i===idx));
+}
+track.addEventListener('scroll',onScroll,{passive:true});
+
+// arrows
+const step=()=>track.clientWidth;
+document.getElementById('next').onclick=()=>track.scrollBy({left:step(),behavior:'smooth'});
+document.getElementById('prev').onclick=()=>track.scrollBy({left:-step(),behavior:'smooth'});
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')track.scrollBy({left:step(),behavior:'smooth'});
+  if(e.key==='ArrowLeft')track.scrollBy({left:-step(),behavior:'smooth'});
+});
+
+// theme toggle (caderninho <-> dark/meia-noite)
+const body=document.body, tog=document.getElementById('toggle');
+function setTheme(t){
+  body.dataset.theme=t;
+  tog.innerHTML = t==='dark' ? '☀️ <span>modo dia</span>' : '🌙 <span>modo noite</span>';
+}
+setTheme(localStorage.getItem('oi-theme')||'caderninho');
+tog.onclick=()=>{const t=body.dataset.theme==='dark'?'caderninho':'dark';
+  setTheme(t); localStorage.setItem('oi-theme',t);};
+
+panels[0].classList.add('in'); onScroll();
+</script>
+</body>
+</html>
