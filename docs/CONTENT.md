@@ -1,45 +1,59 @@
-# Roteiro & Conteúdo
+# Roteiro & Conteúdo — oi amorzinha
 
-Aqui a gente monta a narrativa do site. Preencher aos poucos — Lucas escreve,
-ajustamos juntos. Cada seção vira uma "cena" na rolagem.
+Site = **mensagem do Lucas pra Talita** (voz em 1ª pessoa, "eu → você"). Eles se
+casam em Manchester em julho/2026 (praticidade pro visto dela / mudança pra cá).
+Os textos abaixo são **rascunho do assistente** — o Lucas vai reescrever com as
+palavras dele. A estrutura e as fotos já estão montadas em `concepts/index.html`.
 
-## Seções propostas (roteiro do Lucas — a refinar)
+## A história real (contada pelo Lucas)
 
-A ideia é uma linha do tempo dos nossos momentos, cada um vira uma "cena":
+- **Match em dezembro/2025** (print = foto 02). Ela morava no **Brasil**
+  (Votorantim/Sorocaba, SP) e estava **de mudança pra Lisboa**; ele mora no
+  **Reino Unido**.
+- **Primeiro date** = foto 01. E a foto 05 (o **gato** do quintal) marca esse
+  date porque "a porra do gato infernizou a gente" — virou memória boa.
+- **Segundo date** = foto 03, num **sítio em Sorocaba**.
+- **O bilhete** (foto 04): num date, o Lucas escondeu um bilhetinho na bolsa
+  dela. Ela não viu, deixou os papéis em casa e foi pra Lisboa; a **mãe dela
+  achou** e virou piadinha na época. (bilhete: "GOSTOSA!!! :)")
+- Ela se mudou pra **Lisboa** → começaram as **viagens pela Europa**.
+- Timeline das trips: Budapeste (jan), Algarve/Lisboa/Sintra (jan–mai), Madri
+  (mar, abr), Aveiro (mai, festival das fitas), **Malta** (jun).
 
-1. **Abertura / Hero** — nomes Lucas & Talita, frase manuscrita, Manchester _[data]_.
-2. **O nosso início** — o match no **Bumble** e as primeiras conversas.
-3. **O primeiro date.**
-4. **O segundo date** — quando a gente realmente se conheceu.
-5. **A semana seguinte** — quando marcamos a 1ª viagem, pra **Budapeste**.
-6. **Viagem a Portugal.**
-7. **O aniversário dela comigo, em Madri.**
-8. **... e assim vai** — mais momentos nossos (a preencher).
-9. **A mudança pra Manchester** — o capítulo atual, a vida aqui juntos.
-10. **Declaração final** — a carta principal do Lucas pra Talita.
-11. **Fechamento** — um coração desenhado, os nomes, um "para sempre".
+## Duas categorias de foto (definidas pelo Lucas)
 
-> Tem bastante coisa boa pra escrever — vamos refinando cena por cena. A
-> estrutura aguenta acrescentar/remover momentos sem quebrar nada.
+- **nós / fotos bonitas** (espalhar pela página, às vezes 2 por página):
+  **06, 13, 14, 15, 18, 19, 20** e principalmente a **21** (a melhor foto de
+  vocês → usada em **destaque grande** no final). Pasta `assets/fotos/nos/`.
+- **lugares** (ilustram as viagens): **07, 08, 09, 10, 11, 16, 17** + o **vídeo
+  12** (Madri). Pasta `assets/fotos/lugares/`.
+- **início** (o comecinho): **01, 02, 03, 04, 05**. Pasta `assets/fotos/inicio/`.
 
-## Fotos (checklist)
+Ver mapa completo em `PHOTOS.md`.
 
-Colocar os arquivos em `assets/fotos/`. Anotar aqui quais temos:
+## Estrutura atual das páginas (livro horizontal)
 
-- [ ] Foto de abertura
-- [ ] Foto "como começou"
-- [ ] Fotos da jornada (várias)
-- [ ] Foto em Manchester
-- [ ] _(as fotos vão como o Lucas mandar — sem cortar/dar zoom)_
+0. Hero — "oi, amorzinha / uma mensagem minha pra você"
+1. O match (dez/2025) — foto 02 (print da conversa)
+2. Primeiro date — fotos 01 + 05 (duo, o gato)
+3. Segundo date — foto 03 (sítio Sorocaba)
+4. O bilhete na bolsa — foto 04
+5. "você foi pra Lisboa" (transição, doodle)
+6. Budapeste — fotos 07 + 09 (duo)
+7. Portugal — fotos 10 (Algarve) + 17 (Lisboa) (duo)
+8. Madri — **vídeo 12**
+9. O que eu amo em você (1) — fotos 13 + 14 (duo)
+10. O que eu amo em você (2) — fotos 15 + 18 (duo)
+11. Malta — foto 19
+12. Agora / Manchester — foto 20 ("vem pra casa")
+13. Final — foto **21 em destaque** + "é você, sempre / — seu, Lucas"
 
-## Declarações / textos a escrever
+## Pendências pro Lucas (amanhã)
 
-- [ ] Frase da abertura
-- [ ] Legenda "como começou"
-- [ ] Legendas da jornada
-- [ ] Declaração final (a principal)
-
----
-
-> Dica: não precisa estar pronto pra começar a montar o visual. A gente cria a
-> estrutura com textos-placeholder e vai substituindo pelos de verdade.
+- Reescrever os textos de cada página com as palavras dele.
+- Confirmar **data e local** do casamento (semana de julho/2026, Manchester).
+- Declaração final (a principal).
+- Conferir a localização real de algumas fotos sem GPS (20 e 21). A 21 parece
+  ser **Malta** (Valeta), não Madri — confirmar.
+- Ele ainda vai mandar **mais fotos**.
+- Decidir se mantém o print real da conversa quando o site virar **público**.

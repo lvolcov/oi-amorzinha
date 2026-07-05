@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>oi amorzinha — livro</title>
+<title>oi amorzinha</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -41,31 +41,38 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 .track::-webkit-scrollbar{display:none}
 .panel{position:relative;min-width:100vw;height:100%;scroll-snap-align:center;
   display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;padding:80px 26px 120px}
+  text-align:center;padding:76px 26px 118px}
 .panel .inner{max-width:520px;width:100%}
 
-.kicker{font-family:var(--hand);color:var(--accent);font-size:26px;font-weight:700}
+.kicker{font-family:var(--hand);color:var(--accent);font-size:25px;font-weight:700}
 h1{font-family:var(--hand);font-weight:700;color:var(--ink);
-  font-size:clamp(60px,22vw,120px);line-height:.88}
-.amp{color:var(--accent);display:inline-block;transform:rotate(-8deg)}
-.sub{font-family:var(--hand);font-size:clamp(22px,7vw,32px);color:var(--accent);margin-top:4px}
+  font-size:clamp(58px,21vw,120px);line-height:.88}
+.sub{font-family:var(--hand);font-size:clamp(21px,7vw,32px);color:var(--accent);margin-top:4px}
 .place{font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-top:22px;opacity:.7}
-h2{font-family:var(--hand);color:var(--ink);font-size:clamp(38px,11vw,58px);
+h2{font-family:var(--hand);color:var(--ink);font-size:clamp(36px,10vw,56px);
   font-weight:700;line-height:.95;margin:2px 0 12px}
 p.body{font-size:17px;max-width:34ch;margin:0 auto}
 
-.photo{background:var(--paper);padding:12px 12px 44px;border-radius:3px;
-  box-shadow:0 10px 26px rgba(0,0,0,.16);margin:22px auto 0;position:relative;
-  width:min(84%,300px);transform:rotate(-2deg)}
-.photo:nth-child(even){transform:rotate(2deg)}
+/* polaroids */
+.photo{background:var(--paper);padding:11px 11px 40px;border-radius:3px;
+  box-shadow:0 10px 26px rgba(0,0,0,.16);margin:20px auto 0;position:relative;
+  width:min(72%,262px);transform:rotate(-2deg)}
 .photo .ph{display:block;width:100%;aspect-ratio:3/4;border-radius:2px;
   object-fit:cover;object-position:center;
   background:linear-gradient(135deg,var(--accent2),var(--accent))}
-.photo{width:min(74%,270px)}
-.photo .cap{font-family:var(--hand);font-size:21px;color:var(--ink);
-  position:absolute;left:0;right:0;bottom:10px}
-.photo::before{content:"";position:absolute;top:-12px;left:50%;width:90px;height:24px;
+video.ph{background:#000}
+.photo .cap{font-family:var(--hand);font-size:20px;color:var(--ink);
+  position:absolute;left:0;right:0;bottom:9px}
+.photo::before{content:"";position:absolute;top:-11px;left:50%;width:86px;height:23px;
   transform:translateX(-50%) rotate(-3deg);background:var(--tape)}
+/* two scattered photos on one page */
+.duo{display:flex;justify-content:center;align-items:flex-start;margin-top:20px}
+.duo .photo{width:min(43%,168px);margin:0;padding:8px 8px 30px}
+.duo .photo:first-child{transform:rotate(-4deg);z-index:2}
+.duo .photo:last-child{transform:rotate(4deg);margin-left:-20px;margin-top:24px}
+.duo .photo .cap{font-size:16px;bottom:7px}
+/* featured hero photo */
+.photo.big{width:min(90%,320px);transform:rotate(-1.5deg)}
 
 /* self-drawing doodles */
 .doodle{display:block;margin:16px auto 0;overflow:visible}
@@ -73,7 +80,6 @@ p.body{font-size:17px;max-width:34ch;margin:0 auto}
   stroke-linecap:round;stroke-linejoin:round;
   transition:stroke-dashoffset 1.2s ease .15s}
 .doodle.ink path,.doodle.ink polyline{stroke:var(--ink)}
-/* reveal per panel */
 .panel .inner>*{opacity:0;transform:translateY(18px);
   transition:opacity .6s ease,transform .6s ease}
 .panel.in .inner>*{opacity:1;transform:none}
@@ -112,8 +118,8 @@ p.body{font-size:17px;max-width:34ch;margin:0 auto}
 .toggle{pointer-events:auto;border:1.6px solid var(--line);background:transparent;
   color:var(--ink);font-family:var(--body);font-size:13px;font-weight:700;
   border-radius:30px;padding:7px 14px;cursor:pointer;display:flex;gap:6px;align-items:center}
-.dots{position:fixed;bottom:14px;left:0;right:0;z-index:8;display:flex;gap:7px;
-  justify-content:center;pointer-events:none}
+.dots{position:fixed;bottom:14px;left:0;right:0;z-index:8;display:flex;gap:6px;
+  justify-content:center;pointer-events:none;flex-wrap:wrap;padding:0 20px}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--line);transition:all .3s}
 .dot.on{background:var(--accent);width:20px;border-radius:6px}
 .arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:8;
@@ -126,8 +132,6 @@ p.body{font-size:17px;max-width:34ch;margin:0 auto}
   font-family:var(--hand);font-size:20px;color:var(--accent);opacity:.8;
   animation:nudge 1.8s ease-in-out infinite;pointer-events:none}
 @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(10px)}}
-.home{position:fixed;left:18px;bottom:44px;z-index:8;font-size:13px;
-  color:var(--text);opacity:.5;text-decoration:none}
 </style>
 </head>
 <body data-theme="caderninho">
@@ -144,6 +148,7 @@ p.body{font-size:17px;max-width:34ch;margin:0 auto}
 
 <div class="track" id="track">
 
+  <!-- 0 · HERO -->
   <section class="panel"><div class="inner">
     <h1>oi,<br>amorzinha</h1>
     <div class="sub">uma mensagem minha pra você</div>
@@ -154,61 +159,125 @@ p.body{font-size:17px;max-width:34ch;margin:0 auto}
     <div class="place">Manchester · 2026</div>
   </div></section>
 
+  <!-- 1 · O MATCH -->
   <section class="panel"><div class="inner">
-    <div class="kicker">onde tudo começou</div>
-    <h2>você mandou primeiro</h2>
-    <p class="body">Foi você quem chegou: “oi, bom dia”. Eu não fazia ideia de que aquela mensagem ia mudar a minha vida inteira.</p>
-    <div class="photo"><img class="ph" alt="" src="assets/fotos/02_2025-12-23_conversa-primeira.jpg" onerror="this.removeAttribute('src')"><div class="cap">o nosso primeiro “oi”</div></div>
+    <div class="kicker">dezembro de 2025</div>
+    <h2>a gente deu match</h2>
+    <p class="body">Você no Brasil, de malas quase prontas pra Lisboa. Eu na Inglaterra. No meio de um mapa desse tamanho, a gente se achou.</p>
+    <div class="photo"><img class="ph" alt="" src="assets/fotos/inicio/02_2025-12-23_conversa-primeira.jpg" onerror="this.removeAttribute('src')"><div class="cap">o nosso primeiro “oi”</div></div>
   </div></section>
 
+  <!-- 2 · PRIMEIRO DATE (duo + gato) -->
   <section class="panel"><div class="inner">
     <div class="kicker">o primeiro date</div>
-    <h2>o friozinho</h2>
-    <p class="body">Aquele frio que você diz que ama — e eu, com um friozinho diferente na barriga, só de estar do seu lado.</p>
-    <div class="photo"><img class="ph" alt="" src="assets/fotos/01_2025-12-18_selfie-frio.jpg" onerror="this.removeAttribute('src')"><div class="cap">eu e você, no comecinho</div></div>
+    <h2>eu, você e o gato</h2>
+    <p class="body">Lembro de cada detalhe desse dia — inclusive daquele gato que resolveu não largar a gente um segundo. Virou parte da nossa história.</p>
+    <div class="duo">
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/inicio/01_2025-12-18_selfie-frio.jpg" onerror="this.removeAttribute('src')"><div class="cap">o começo</div></div>
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/inicio/05_2026-01-06_gato-quintal.jpg" onerror="this.removeAttribute('src')"><div class="cap">o tal do gato</div></div>
+    </div>
   </div></section>
 
+  <!-- 3 · SEGUNDO DATE -->
   <section class="panel"><div class="inner">
     <div class="kicker">o segundo date</div>
-    <h2>era você</h2>
-    <p class="body">Foi aí que eu entendi. Não era acaso, não era paixão de app. Era você — e eu já não queria outro lugar no mundo.</p>
-    <div class="photo"><img class="ph" alt="" src="assets/fotos/06_2026-01-06_espelho-noite.jpg" onerror="this.removeAttribute('src')"><div class="cap">a gente, sem querer ir embora</div></div>
+    <h2>um sítio em Sorocaba</h2>
+    <p class="body">A gente já parecia gente que se conhece há anos. Eu só queria mais um tanto de tempo do seu lado.</p>
+    <div class="photo"><img class="ph" alt="" src="assets/fotos/inicio/03_2025-12-24_parque-bancos.jpg" onerror="this.removeAttribute('src')"><div class="cap">o nosso segundo date</div></div>
   </div></section>
 
+  <!-- 4 · O BILHETE -->
   <section class="panel"><div class="inner">
-    <div class="kicker">a primeira viagem</div>
-    <h2>Budapeste</h2>
-    <p class="body">Na semana seguinte eu já queria te levar pro mundo. E a gente foi. Corajosos, apaixonados — e certíssimos.</p>
-    <div class="photo"><img class="ph" alt="" src="assets/fotos/07_2026-01-17_budapeste-parlamento.jpg" onerror="this.removeAttribute('src')"><div class="cap">✈ a nossa primeira de muitas</div></div>
+    <div class="kicker">um segredinho</div>
+    <h2>o bilhete na bolsa</h2>
+    <p class="body">Num date, escondi um bilhete na sua bolsa. Você nem viu — deixou os papéis em casa e foi pra Lisboa. Sua mãe achou, e até hoje é piada.</p>
+    <div class="photo"><img class="ph" alt="" src="assets/fotos/inicio/04_2025-12-31_bilhete-gostosa.jpg" onerror="this.removeAttribute('src')"><div class="cap">flagrado pela sogra 😅</div></div>
   </div></section>
 
+  <!-- 5 · MUDANÇA -->
   <section class="panel"><div class="inner">
-    <div class="kicker">e a gente não parou</div>
-    <h2>por aí, com você</h2>
-    <p class="body">Cada lugar novo virou desculpa pra te ver rir mais um pouco.</p>
+    <div class="kicker">e então…</div>
+    <h2>você foi pra Lisboa</h2>
+    <p class="body">Você atravessou o oceano, e a Europa virou o nosso quintal. Foi aí que as viagens começaram.</p>
     <svg class="doodle scribble" width="300" height="66" viewBox="0 0 320 70">
       <path class="ln" d="M8 42 C 40 42,34 20,52 22 C 70 24,60 50,92 42 C 118 36,135 44,150 44 M174 44 C 188 44,205 36,232 42 C 262 50,252 22,270 22 C 288 20,282 42,312 42"/>
       <path class="hrt" d="M162 54 C 150 44,146 32,154 28 C 159 25,162 30,162 33 C 162 30,165 25,170 28 C 178 32,174 44,162 54 Z"/>
     </svg>
   </div></section>
 
+  <!-- 6 · BUDAPESTE -->
   <section class="panel"><div class="inner">
-    <div class="kicker">o seu aniversário</div>
-    <h2>Madri</h2>
-    <p class="body">No seu dia, o presente era eu poder estar ali, do seu lado. Sempre vai ser.</p>
-    <div class="photo"><img class="ph" alt="" src="assets/fotos/21_2026-06-23_predio-verao.jpg" onerror="this.removeAttribute('src')"><div class="cap">o seu dia, comigo</div></div>
+    <div class="kicker">janeiro · a primeira viagem</div>
+    <h2>Budapeste</h2>
+    <p class="body">A nossa primeira de muitas. Frio lá fora, a gente bem coladinho.</p>
+    <div class="duo">
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/07_2026-01-17_budapeste-parlamento.jpg" onerror="this.removeAttribute('src')"><div class="cap">✈ Budapeste</div></div>
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/09_2026-01-17_budapeste-praca.jpg" onerror="this.removeAttribute('src')"><div class="cap">na neve</div></div>
+    </div>
   </div></section>
 
+  <!-- 7 · PORTUGAL -->
+  <section class="panel"><div class="inner">
+    <div class="kicker">e a gente não parou</div>
+    <h2>Portugal, de ponta a ponta</h2>
+    <p class="body">Do Algarve a Lisboa, cada cantinho foi virando um pouquinho nosso.</p>
+    <div class="duo">
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/10_2026-01-24_arvores-inverno.jpg" onerror="this.removeAttribute('src')"><div class="cap">Algarve</div></div>
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/17_2026-05-08_restaurante.jpg" onerror="this.removeAttribute('src')"><div class="cap">Lisboa</div></div>
+    </div>
+  </div></section>
+
+  <!-- 8 · MADRI (vídeo) -->
+  <section class="panel"><div class="inner">
+    <div class="kicker">março · Madri</div>
+    <h2>Madri</h2>
+    <p class="body">Mais uma cidade na lista, mais um monte de foto boba e feliz.</p>
+    <div class="photo"><video class="ph" src="assets/fotos/lugares/12_2026-03-07_madri.mp4" muted loop playsinline autoplay preload="metadata"></video><div class="cap">nós dois por lá</div></div>
+  </div></section>
+
+  <!-- 9 · O QUE AMO EM VOCÊ (1) -->
+  <section class="panel"><div class="inner">
+    <div class="kicker">e no meio de tudo isso</div>
+    <h2>o que eu amo em você</h2>
+    <p class="body">O seu jeito, o seu riso fácil, a coragem de mudar a vida inteira por nós.</p>
+    <div class="duo">
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/13_2026-03-10_noite-teto.jpg" onerror="this.removeAttribute('src')"><div class="cap">você</div></div>
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/14_2026-03-25_cabine-fotos.jpg" onerror="this.removeAttribute('src')"><div class="cap">a gente</div></div>
+    </div>
+  </div></section>
+
+  <!-- 10 · O QUE AMO EM VOCÊ (2) -->
+  <section class="panel"><div class="inner">
+    <div class="kicker">e mais</div>
+    <h2>toda vez, de novo</h2>
+    <p class="body">Tem foto nossa que eu abro só pra lembrar da sorte que eu tive.</p>
+    <div class="duo">
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/15_2026-03-28_por-do-sol-aviao.jpg" onerror="this.removeAttribute('src')"><div class="cap">pôr do sol</div></div>
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/18_2026-05-09_festival-fitas.jpg" onerror="this.removeAttribute('src')"><div class="cap">Aveiro</div></div>
+    </div>
+  </div></section>
+
+  <!-- 11 · MALTA -->
+  <section class="panel"><div class="inner">
+    <div class="kicker">junho · Malta</div>
+    <h2>Malta</h2>
+    <p class="body">Girassóis, sol, e você — que é a minha parte favorita de qualquer lugar.</p>
+    <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/19_2026-06-19_kissing-booth.jpg" onerror="this.removeAttribute('src')"><div class="cap">kissing booth 💛</div></div>
+  </div></section>
+
+  <!-- 12 · AGORA / MANCHESTER -->
   <section class="panel"><div class="inner">
     <div class="kicker">e agora</div>
     <h2>vem pra casa</h2>
-    <p class="body">Eu caso com você essa semana pra começar a parte mais importante: a nossa vida, aqui, todo dia. Vem.</p>
-    <div class="photo"><img class="ph" alt="" src="assets/fotos/20_2026-06-20_vestido-branco.jpg" onerror="this.removeAttribute('src')"><div class="cap">o nosso próximo capítulo</div></div>
+    <p class="body">Essa semana eu caso com você. Não pela papelada — mas porque eu quero você aqui, comigo, todo dia.</p>
+    <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/20_2026-06-20_vestido-branco.jpg" onerror="this.removeAttribute('src')"><div class="cap">o nosso próximo capítulo</div></div>
   </div></section>
 
+  <!-- 13 · FINAL (foto destaque 21) -->
   <section class="panel"><div class="inner">
-    <svg class="doodle heartbeat" width="130" height="120" viewBox="0 0 100 90"><path d="M50 82 C 10 55,8 20,30 14 C 44 10,50 24,50 30 C 50 24,56 10,70 14 C 92 20,90 55,50 82 Z"/></svg>
-    <h2>pra sempre</h2>
+    <div class="kicker">pra sempre</div>
+    <div class="photo big"><img class="ph" alt="" src="assets/fotos/nos/21_2026-06-23_predio-verao.jpg" onerror="this.removeAttribute('src')"><div class="cap">eu e você</div></div>
+    <h2>é você, sempre</h2>
     <div class="sub">— seu, Lucas</div>
   </div></section>
 
@@ -227,23 +296,19 @@ p.body{font-size:17px;max-width:34ch;margin:0 auto}
 const track=document.getElementById('track');
 const panels=[...document.querySelectorAll('.panel')];
 
-// dash length for each doodle so it draws in
 document.querySelectorAll('.doodle path,.doodle polyline').forEach(p=>{
   const L=p.getTotalLength(); p.style.strokeDasharray=L; p.style.strokeDashoffset=L;
 });
 
-// dots
 const dots=document.getElementById('dots');
 panels.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i?'':' on');dots.appendChild(d);});
 const dotEls=[...dots.children];
 
-// reveal panels as they enter (horizontal)
 const io=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting) e.target.classList.add('in');
-}),{root:track,threshold:.55});
+}),{root:track,threshold:.5});
 panels.forEach(p=>io.observe(p));
 
-// floating hearts
 const F=document.getElementById('floaters');
 const heartPath='M50 82 C 10 55,8 20,30 14 C 44 10,50 24,50 30 C 50 24,56 10,70 14 C 92 20,90 55,50 82 Z';
 for(let i=0;i<9;i++){
@@ -256,7 +321,6 @@ for(let i=0;i<9;i++){
   s.innerHTML='<path d="'+heartPath+'"/>'; F.appendChild(s);
 }
 
-// journey line + traveling heart tied to horizontal scroll
 const jfill=document.getElementById('jfill'), jheart=document.getElementById('jheart');
 const hint=document.getElementById('hint');
 function onScroll(){
@@ -270,7 +334,6 @@ function onScroll(){
 }
 track.addEventListener('scroll',onScroll,{passive:true});
 
-// arrows
 const step=()=>track.clientWidth;
 document.getElementById('next').onclick=()=>track.scrollBy({left:step(),behavior:'smooth'});
 document.getElementById('prev').onclick=()=>track.scrollBy({left:-step(),behavior:'smooth'});
@@ -279,7 +342,6 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowLeft')track.scrollBy({left:-step(),behavior:'smooth'});
 });
 
-// theme toggle (caderninho <-> dark/meia-noite)
 const body=document.body, tog=document.getElementById('toggle');
 function setTheme(t){
   body.dataset.theme=t;
