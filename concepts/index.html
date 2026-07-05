@@ -128,6 +128,13 @@ video.ph{background:#000}
 .ellipsis i:nth-child(2){animation-delay:.22s}
 .ellipsis i:nth-child(3){animation-delay:.44s}
 @keyframes dot{0%,55%,100%{opacity:.2}28%{opacity:1}}
+/* palavra "começou" destacada — início da jornada */
+.startw{color:var(--accent);font-weight:700;position:relative;white-space:nowrap}
+.startw::after{content:"";position:absolute;left:-3px;right:-3px;bottom:-5px;height:8px;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10'><path d='M2 6 Q25 1 50 6 T98 5' stroke='%23E63946' stroke-width='3' fill='none' stroke-linecap='round'/></svg>") center/100% 100% no-repeat;
+  transform:scaleX(0);transform-origin:left;transition:transform .8s ease .4s}
+.panel.in .startw::after{transform:scaleX(1)}
+
 /* frase de chegada */
 .finale{font-family:var(--hand);color:var(--accent);font-weight:700;
   font-size:clamp(26px,7.5vw,40px);line-height:1.08;margin-top:12px}
@@ -217,8 +224,8 @@ video.ph{background:#000}
   <section class="panel" id="startPanel"><div class="inner">
     <div class="kicker">nosso início ✎</div>
     <h2 class="oneline">Match enganoso e despretensioso</h2>
-    <p class="body">Um match de Sorocaba, falando <i>intimacy without commitment</i>, e um perfil com fotos suas que até hoje me pego olhando e te achando muito lindinha pra ser real.</p>
-    <div class="photo full"><img class="ph" alt="" src="assets/fotos/inicio/02_2025-12-23_conversa-primeira.jpg" onerror="this.removeAttribute('src')"><div class="cap">tudo começou aqui</div></div>
+    <p class="body">Um match de Sorocaba, falando <i>intimacy without commitment</i>, e um perfil com fotos suas que até hoje me pego olhando e te achando muito lindinha pra ser real e minha.</p>
+    <div class="photo full"><img class="ph" alt="" src="assets/fotos/inicio/02_2025-12-23_conversa-primeira.jpg" onerror="this.removeAttribute('src')"><div class="cap">tudo <span class="startw">começou</span> aqui</div></div>
   </div></section>
 
   <!-- 4 · PRIMEIRO DATE -->
@@ -318,12 +325,8 @@ video.ph{background:#000}
   <section class="panel"><div class="inner">
     <div class="photo nocap"><img class="ph" alt="" src="assets/fotos/nos/15_2026-03-28_por-do-sol-aviao.jpg" onerror="this.removeAttribute('src')"></div>
     <h2>Eu te amo, lindinha!</h2>
-    <div class="finale">por uma vida de pores do sol juntos
-      <svg class="doodle scribble finale-line" width="280" height="28" viewBox="0 0 300 28">
-        <path class="ln" d="M6 17 C 60 5, 130 25, 182 13 C 222 4, 262 20, 294 11"/>
-      </svg>
-    </div>
-    <div class="sub">— seu amorzinho 💛</div>
+    <div class="finale" id="finalePhrase">por uma vida de pores do sol juntos</div>
+    <div class="sub" id="finaleSig" style="margin-top:24px">— seu amorzinho ❤️</div>
   </div></section>
 
 </div>
@@ -366,9 +369,9 @@ const traceTip=document.getElementById('traceTip');
 const motifBox=document.getElementById('traceMotifs');
 let traceLen=1, motifs=[];
 const motifDefs=[
-  {f:1/12,t:'heart'},{f:2/12,t:'cat'},{f:3/12,t:'heart'},{f:4/12,t:'snow'},
-  {f:5/12,t:'sun'},{f:6/12,t:'heart'},{f:7/12,t:'star'},{f:8/12,t:'heart'},
-  {f:9/12,t:'heart'},{f:10/12,t:'rings'},{f:11/12,t:'heart'}
+  {f:0.05,t:'heart'},{f:0.14,t:'cat'},{f:0.22,t:'heart'},{f:0.30,t:'snow'},
+  {f:0.37,t:'heart'},{f:0.45,t:'sun'},{f:0.53,t:'heart'},{f:0.61,t:'star'},
+  {f:0.69,t:'heart'},{f:0.77,t:'heart'},{f:0.85,t:'rings'},{f:0.93,t:'heart'}
 ];
 function motifSVG(t){
   if(t==='heart') return '<path class="f" d="M0 4 C -7 -2,-4 -8,0 -3 C 4 -8,7 -2,0 4 Z"/>';
@@ -380,14 +383,40 @@ function motifSVG(t){
   return '';
 }
 function buildTrace(){
-  const W=window.innerWidth,H=window.innerHeight,m=15,r=42,xc=W/2;
+  const W=window.innerWidth,H=window.innerHeight;
+  const L=18,R=W-18,T=18,B=H-18,xc=W/2,A=11;
+  // alinha o sublinhado logo abaixo da frase final (mede a posição real)
+  const fp=document.getElementById('finalePhrase');
+  let py=H*0.73;
+  if(fp){const r=fp.getBoundingClientRect();
+    const sg=document.getElementById('finaleSig');
+    const sgt=sg?sg.getBoundingClientRect().top:r.bottom+28;
+    if(r.height>1) py=Math.min(H-42,(r.bottom+sgt)/2);}
   trace.setAttribute('viewBox',`0 0 ${W} ${H}`);
-  // moldura fechada; começa e fecha no centro do rodapé (perto da frase final)
-  const d=`M ${xc} ${H-m}`
-    +` L ${W-m-r} ${H-m} Q ${W-m} ${H-m} ${W-m} ${H-m-r}`
-    +` L ${W-m} ${m+r} Q ${W-m} ${m} ${W-m-r} ${m}`
-    +` L ${m+r} ${m} Q ${m} ${m} ${m} ${m+r}`
-    +` L ${m} ${H-m-r} Q ${m} ${H-m} ${m+r} ${H-m} Z`;
+  // linha que serpenteia pela borda (com ondas e laços) e termina no sublinhado da frase
+  function wavy(x0,y0,x1,y1,nx,ny,waves){
+    let s='';const N=Math.max(12,waves*8);
+    for(let i=1;i<=N;i++){const t=i/N,
+      bx=x0+(x1-x0)*t, by=y0+(y1-y0)*t, off=Math.sin(t*Math.PI*waves)*A;
+      s+=`L ${(bx+nx*off).toFixed(1)} ${(by+ny*off).toFixed(1)} `;}
+    return s;
+  }
+  function curl(cx,cy,r){ // um lacinho
+    return `C ${cx-r} ${cy-r*1.8}, ${cx+r} ${cy-r*1.8}, ${cx+r} ${cy} `
+          +`C ${cx+r} ${cy+r}, ${cx-r} ${cy+r}, ${cx-r+2} ${cy-2} `;
+  }
+  const mTx=L+(R-L)*0.52, mRy=T+(B-T)*0.5;
+  let d=`M ${L} ${(B-30).toFixed(1)} `;
+  d+=wavy(L,B-30,L,T+28,1,0,3);            // sobe pela esquerda
+  d+=wavy(L,T+28,mTx-16,T,0,1,2);          // topo até o meio
+  d+=curl(mTx,T-1,9);                       // laço no topo
+  d+=wavy(mTx+16,T,R-28,T,0,1,2);          // topo até a direita
+  d+=wavy(R-28,T,R,mRy-16,-1,0,1);         // desce pela direita
+  d+=curl(R-1,mRy,9);                       // laço na direita
+  d+=wavy(R,mRy+16,R,B,-1,0,2);            // continua descendo
+  d+=wavy(R,B,xc+72,B,0,-1,2);             // rodapé até perto do centro
+  d+=`C ${xc+30} ${B}, ${xc+96} ${py+16}, ${xc+74} ${py} `; // sobe até a frase
+  d+=`L ${xc-74} ${py} `;                   // desenha o sublinhado final
   tracePath.setAttribute('d',d);
   traceLen=tracePath.getTotalLength();
   tracePath.style.strokeDasharray=traceLen;
