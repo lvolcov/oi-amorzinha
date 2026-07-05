@@ -1,6 +1,6 @@
 # Inventário de fotos
 
-Ordenadas por data. Web em `concepts/assets/fotos/`, originais (full-res,
+Ordenadas por data. Web em `assets/fotos/`, originais (full-res,
 giradas) em `assets/originais/`. Datas e locais vêm do EXIF/GPS quando existe
 (fotos de câmera têm; prints e imagens de WhatsApp perderam o metadata).
 

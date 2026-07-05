@@ -3,7 +3,7 @@
 Site = **mensagem do Lucas pra Talita** (voz em 1ª pessoa, "eu → você"). Eles se
 casam em Manchester em julho/2026 (praticidade pro visto dela / mudança pra cá).
 Os textos abaixo são **rascunho do assistente** — o Lucas vai reescrever com as
-palavras dele. A estrutura e as fotos já estão montadas em `concepts/index.html`.
+palavras dele. A estrutura e as fotos já estão montadas em `index.html`.
 
 ## A história real (contada pelo Lucas)
 
