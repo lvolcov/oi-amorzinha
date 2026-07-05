@@ -29,11 +29,11 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 
 /* floating hearts */
 .floaters{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
-.floaters svg{position:absolute;fill:var(--accent);opacity:.13;animation:drift linear infinite}
+.floaters svg{position:absolute;fill:var(--accent);opacity:.14;animation:drift linear infinite}
 @keyframes drift{0%{transform:translateY(20px) rotate(-8deg)}
   50%{transform:translateY(-20px) rotate(8deg)}100%{transform:translateY(20px) rotate(-8deg)}}
 
-/* traço-moldura que se desenha ao navegar (começa no Bumble, fecha no fim) */
+/* traço-moldura que se desenha ao navegar */
 .trace{position:fixed;inset:0;z-index:1;pointer-events:none;width:100%;height:100%;
   opacity:0;transition:opacity .45s ease}
 .trace #tracePath{fill:none;stroke:var(--accent);stroke-width:4;
@@ -51,7 +51,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 .track::-webkit-scrollbar{display:none}
 .panel{position:relative;min-width:100vw;height:100%;scroll-snap-align:center;
   display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;padding:74px 30px 96px}
+  text-align:center;padding:66px 30px 92px}
 .panel .inner{max-width:520px;width:100%}
 
 .kicker{font-family:var(--hand);color:var(--accent);font-size:25px;font-weight:700}
@@ -62,13 +62,15 @@ h1{font-family:var(--hand);font-weight:700;color:var(--ink);
 .place{font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-top:18px;opacity:.7}
 h2{font-family:var(--hand);color:var(--ink);font-size:clamp(32px,9vw,50px);
   font-weight:700;line-height:1;margin:2px 0 12px}
+.oneline{white-space:nowrap;font-size:clamp(20px,6vw,30px)}
 p.body{font-size:17px;max-width:36ch;margin:10px auto 0}
-p.body.long{font-size:16px;max-width:40ch;line-height:1.55}
+p.body.long{font-size:15px;max-width:40ch;line-height:1.5}
 
 /* polaroids */
 .photo{background:var(--paper);padding:11px 11px 38px;border-radius:3px;
   box-shadow:0 10px 26px rgba(0,0,0,.16);margin:18px auto 0;position:relative;
   width:min(70%,252px);transform:rotate(-2deg)}
+.photo.nocap{padding-bottom:12px}
 .photo .ph{display:block;width:100%;aspect-ratio:3/4;border-radius:2px;
   object-fit:cover;object-position:center;
   background:linear-gradient(135deg,var(--accent2),var(--accent))}
@@ -83,8 +85,9 @@ video.ph{background:#000}
 .photo.full .ph{aspect-ratio:auto;height:auto;max-height:50vh;
   object-fit:contain;background:var(--paper)}
 
-/* duas / três fotos espalhadas */
-.duo,.trio{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;margin-top:16px}
+/* grupos de fotos (scrapbook) */
+.duo,.trio,.grid4{position:relative;display:flex;flex-wrap:wrap;
+  justify-content:center;align-items:flex-start;margin-top:16px}
 .duo .photo{width:min(43%,166px);margin:0;padding:8px 8px 30px}
 .duo .photo:first-child{transform:rotate(-4deg);z-index:2}
 .duo .photo:last-child{transform:rotate(4deg);margin-left:-20px;margin-top:22px}
@@ -93,6 +96,24 @@ video.ph{background:#000}
 .trio .photo:nth-child(1){transform:rotate(-5deg);z-index:3}
 .trio .photo:nth-child(2){transform:rotate(4deg);margin-left:-16px;margin-top:16px;z-index:2}
 .trio .photo:nth-child(3){transform:rotate(-2deg);margin-top:4px;z-index:4}
+/* quatro fotos = colagem scrapbook, sem legenda */
+.grid4{max-width:340px;margin:14px auto 0}
+.grid4 .photo{width:min(45%,152px);margin:-7px;padding:7px 7px 12px}
+.grid4 .photo .cap{display:none}
+.grid4 .photo:nth-child(1){transform:rotate(-6deg);z-index:2}
+.grid4 .photo:nth-child(2){transform:rotate(5deg);z-index:3}
+.grid4 .photo:nth-child(3){transform:rotate(4deg);z-index:1}
+.grid4 .photo:nth-child(4){transform:rotate(-5deg);z-index:2}
+
+/* adesivos de coração (scrapbook) em volta dos grupos de fotos */
+.duo::before,.trio::before,.grid4::before,
+.duo::after,.trio::after,.grid4::after{
+  content:"";position:absolute;width:24px;height:24px;pointer-events:none;z-index:6;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 90'><path fill='%23E63946' d='M50 82 C10 55 8 20 30 14 C44 10 50 24 50 30 C50 24 56 10 70 14 C92 20 90 55 50 82Z'/></svg>") center/contain no-repeat;
+  opacity:.55}
+.duo::before,.trio::before,.grid4::before{top:-15px;left:-6px;transform:rotate(-16deg)}
+.duo::after,.trio::after,.grid4::after{bottom:-8px;right:-4px;transform:rotate(14deg)}
+.grid4::before{top:-18px;left:6px} .grid4::after{bottom:-14px;right:8px;width:28px;height:28px}
 
 /* enfeites / gracinhas */
 .cheeky{margin-top:16px;font-size:32px;animation:wiggle 1.7s ease-in-out infinite}
@@ -107,7 +128,6 @@ video.ph{background:#000}
 .ellipsis i:nth-child(2){animation-delay:.22s}
 .ellipsis i:nth-child(3){animation-delay:.44s}
 @keyframes dot{0%,55%,100%{opacity:.2}28%{opacity:1}}
-.ellipsis.top{display:block;font-family:var(--hand);font-size:52px;margin-bottom:2px}
 /* frase de chegada */
 .finale{font-family:var(--hand);color:var(--accent);font-weight:700;
   font-size:clamp(26px,7.5vw,40px);line-height:1.08;margin-top:12px}
@@ -115,8 +135,10 @@ video.ph{background:#000}
 .finale-line .ln{stroke:var(--accent)!important}
 .trace.done #traceTip{animation:beat 1.4s ease-in-out infinite}
 
-/* self-drawing doodles (scribble) */
+/* doodles que se desenham (scribble) */
 .doodle{display:block;margin:16px auto 0;overflow:visible}
+.linkline{margin:0 auto 2px}
+.linkline .ln{stroke:var(--accent)!important}
 .scribble .ln{fill:none;stroke:var(--ink);stroke-width:3.4;stroke-linecap:round;
   stroke-linejoin:round;transition:stroke-dashoffset 1.5s ease .1s}
 .scribble .hrt{fill:var(--accent);stroke:none;transform-box:fill-box;
@@ -134,12 +156,12 @@ video.ph{background:#000}
 
 /* controls */
 .top{position:fixed;top:0;left:0;right:0;z-index:8;display:flex;
-  justify-content:space-between;align-items:center;padding:14px 18px;
-  padding-top:max(14px,env(safe-area-inset-top))}
-.brand{font-family:var(--hand);font-size:24px;color:var(--ink);opacity:.85}
+  justify-content:space-between;align-items:center;padding:9px 12px;
+  padding-top:max(9px,env(safe-area-inset-top))}
+.brand{font-family:var(--hand);font-size:21px;color:var(--ink);opacity:.85}
 .toggle{pointer-events:auto;border:1.6px solid var(--line);background:transparent;
-  color:var(--ink);font-family:var(--body);font-size:13px;font-weight:700;
-  border-radius:30px;padding:7px 14px;cursor:pointer;display:flex;gap:6px;align-items:center}
+  border-radius:50%;width:38px;height:38px;padding:0;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:17px;line-height:1}
 .dots{position:fixed;bottom:12px;left:0;right:0;z-index:8;display:flex;gap:5px;
   justify-content:center;pointer-events:none;flex-wrap:wrap;padding:0 20px}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--line);transition:all .3s}
@@ -167,8 +189,8 @@ video.ph{background:#000}
 </svg>
 
 <div class="top">
-  <div class="brand">oi amorzinha</div>
-  <button class="toggle" id="toggle">🌙 <span>modo noite</span></button>
+  <div class="brand">oi amorzinha!</div>
+  <button class="toggle" id="toggle" aria-label="modo noite">🌙</button>
 </div>
 
 <button class="arrow l" id="prev">‹</button>
@@ -180,21 +202,21 @@ video.ph{background:#000}
   <section class="panel"><div class="inner cover">
     <h1 class="cover-t">Oi Amorzinha!</h1>
     <p class="body">Tenho um bilhetinho de amor pra você</p>
-    <div class="photo big"><img class="ph" alt="" src="assets/fotos/nos/21_2026-06-23_predio-verao.jpg" onerror="this.removeAttribute('src')"><div class="cap">eu e você</div></div>
+    <div class="photo big nocap"><img class="ph" alt="" src="assets/fotos/nos/21_2026-06-23_predio-verao.jpg" onerror="this.removeAttribute('src')"></div>
     <div class="place">5 de julho de 2026</div>
   </div></section>
 
   <!-- 2 · QUE SORTE A MINHA -->
   <section class="panel"><div class="inner">
     <h2>Que sorte a minha!</h2>
-    <p class="body">Oi amorzinha, quero iniciar esse bilhetinho pra você falando como sou feliz e grato pelo universo ter te colocado na minha vida.</p>
-    <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/19_2026-06-19_kissing-booth.jpg" onerror="this.removeAttribute('src')"><div class="cap">💛</div></div>
+    <p class="body">Quero iniciar esse bilhetinho pra você falando como sou feliz e grato pelo universo ter te colocado na minha vida. ❤️</p>
+    <div class="photo nocap"><img class="ph" alt="" src="assets/fotos/nos/19_2026-06-19_kissing-booth.jpg" onerror="this.removeAttribute('src')"></div>
   </div></section>
 
   <!-- 3 · NOSSO INÍCIO (print do Bumble; começa o traço) -->
   <section class="panel" id="startPanel"><div class="inner">
     <div class="kicker">nosso início ✎</div>
-    <h2>Match enganoso e despretensioso</h2>
+    <h2 class="oneline">Match enganoso e despretensioso</h2>
     <p class="body">Um match de Sorocaba, falando <i>intimacy without commitment</i>, e um perfil com fotos suas que até hoje me pego olhando e te achando muito lindinha pra ser real.</p>
     <div class="photo full"><img class="ph" alt="" src="assets/fotos/inicio/02_2025-12-23_conversa-primeira.jpg" onerror="this.removeAttribute('src')"><div class="cap">tudo começou aqui</div></div>
   </div></section>
@@ -202,11 +224,11 @@ video.ph{background:#000}
   <!-- 4 · PRIMEIRO DATE -->
   <section class="panel"><div class="inner">
     <div class="kicker">o primeiro date</div>
-    <p class="body">Após 2 semanas de conversas, eu desci do avião direto pro nosso primeiro date, que foi tão bom e único que confirmou que havia algo ali entre a gente. Não duramos 5 minutos sem nos beijar, as horas conversando com você na praça tomando vinho passaram que eu nem vi.</p>
+    <p class="body">Após 2 semanas de conversas, eu desci do avião direto pro nosso primeiro date, que foi tão bom e único que confirmou que havia algo ali entre a gente (que parece que nós dois já sabíamos). Não duramos 5 minutos no date sem nos beijar, as horas conversando com você na praça tomando vinho passaram que eu nem vi.</p>
     <div class="photo"><img class="ph" alt="" src="assets/fotos/inicio/01_2025-12-18_selfie-frio.jpg" onerror="this.removeAttribute('src')"><div class="cap">o nosso dia um</div></div>
   </div></section>
 
-  <!-- 5 · SEGUNDO DATE (fotos 3 e 5) -->
+  <!-- 5 · SEGUNDO DATE -->
   <section class="panel"><div class="inner">
     <div class="kicker">o segundo date</div>
     <h2>O nosso fogo, as vacas noturnas que eram cavalos brancos e o gato</h2>
@@ -215,27 +237,28 @@ video.ph{background:#000}
       <div class="photo"><img class="ph" alt="" src="assets/fotos/inicio/03_2025-12-24_parque-bancos.jpg" onerror="this.removeAttribute('src')"><div class="cap">o sítio</div></div>
       <div class="photo"><img class="ph" alt="" src="assets/fotos/inicio/05_2026-01-06_gato-quintal.jpg" onerror="this.removeAttribute('src')"><div class="cap">o gato</div></div>
     </div>
-    <div class="cheeky">🔥🙈🔥<span>…o resto fica entre a gente</span></div>
+    <div class="cheeky">🔥😈🔥<span>…o resto fica entre a gente</span></div>
   </div></section>
 
-  <!-- 6 · DATE APÓS DATE (fotos 6 e 4) -->
+  <!-- 6 · DATE APÓS DATE (sem legendas) -->
   <section class="panel"><div class="inner">
     <h2>Um date após o outro, nossas próprias historinhas acontecendo.</h2>
     <p class="body">A gente nunca conseguiu sair de um date sem já ter o próximo marcado. Só sabendo quando eu te veria de novo pra controlar a ansiedade de estar longe de você.</p>
     <div class="duo">
-      <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/06_2026-01-06_espelho-noite.jpg" onerror="this.removeAttribute('src')"><div class="cap">nós</div></div>
-      <div class="photo"><img class="ph" alt="" src="assets/fotos/inicio/04_2025-12-31_bilhete-gostosa.jpg" onerror="this.removeAttribute('src')"><div class="cap">o bilhete</div></div>
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/06_2026-01-06_espelho-noite.jpg" onerror="this.removeAttribute('src')"></div>
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/inicio/04_2025-12-31_bilhete-gostosa.jpg" onerror="this.removeAttribute('src')"></div>
     </div>
   </div></section>
 
   <!-- 7 · EUROPA (título) + Budapeste -->
   <section class="panel"><div class="inner">
-    <h2>Você então se mudou e a Europa virou nosso quintal.</h2>
+    <h2>Você então se mudou pra Lisboa e a Europa virou nosso quintal.</h2>
     <div class="trio">
       <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/07_2026-01-17_budapeste-parlamento.jpg" onerror="this.removeAttribute('src')"><div class="cap">Budapeste</div></div>
       <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/08_2026-01-17_budapeste-cerveja.jpg" onerror="this.removeAttribute('src')"><div class="cap">na neve</div></div>
       <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/09_2026-01-17_budapeste-praca.jpg" onerror="this.removeAttribute('src')"><div class="cap">saúde!</div></div>
     </div>
+    <div class="sub" style="margin-top:16px">Eu te amo tanto ❤️</div>
   </div></section>
 
   <!-- 8 · EUROPA · Portugal + frase "derreter" -->
@@ -248,7 +271,7 @@ video.ph{background:#000}
     </div>
   </div></section>
 
-  <!-- 9 · EUROPA · "Xiiii..." (piada interna) -->
+  <!-- 9 · EUROPA · "Xiiii...." (piada interna) -->
   <section class="panel"><div class="inner">
     <div class="bigred">Xiiii....</div>
     <svg class="doodle scribble" width="300" height="66" viewBox="0 0 320 70">
@@ -257,37 +280,31 @@ video.ph{background:#000}
     </svg>
   </div></section>
 
-  <!-- 10 · EUROPA · Madri -->
+  <!-- 10 · EUROPA · colagem 4 fotos (scrapbook) -->
   <section class="panel"><div class="inner">
-    <div class="duo">
-      <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/11_2026-03-07_espelho-tulipas.jpg" onerror="this.removeAttribute('src')"><div class="cap">Madri</div></div>
-      <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/16_2026-04-19_jantar-amigos.jpg" onerror="this.removeAttribute('src')"><div class="cap">com a galera</div></div>
+    <div class="grid4">
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/11_2026-03-07_espelho-tulipas.jpg" onerror="this.removeAttribute('src')"></div>
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/16_2026-04-19_jantar-amigos.jpg" onerror="this.removeAttribute('src')"></div>
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/13_2026-03-10_noite-teto.jpg" onerror="this.removeAttribute('src')"></div>
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/18_2026-05-09_festival-fitas.jpg" onerror="this.removeAttribute('src')"></div>
     </div>
   </div></section>
 
-  <!-- 11 · EUROPA · Aveiro / mais nós -->
+  <!-- 11 · EUROPA · vídeo + "..." -->
   <section class="panel"><div class="inner">
-    <div class="duo">
-      <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/13_2026-03-10_noite-teto.jpg" onerror="this.removeAttribute('src')"><div class="cap">você</div></div>
-      <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/18_2026-05-09_festival-fitas.jpg" onerror="this.removeAttribute('src')"><div class="cap">Aveiro</div></div>
-    </div>
-  </div></section>
-
-  <!-- 12 · EUROPA · vídeo + "..." -->
-  <section class="panel"><div class="inner">
-    <div class="photo"><video class="ph" src="assets/fotos/lugares/12_2026-03-07_madri.mp4" muted loop playsinline autoplay preload="metadata"></video><div class="cap">nós dois</div></div>
+    <div class="photo nocap"><video class="ph" src="assets/fotos/lugares/12_2026-03-07_madri.mp4" muted loop playsinline autoplay preload="metadata"></video></div>
     <p class="body">Eu te amo e sou muito feliz cada segundo do seu lado<span class="ellipsis"><i>.</i><i>.</i><i>.</i></span></p>
   </div></section>
 
-  <!-- 13 · A CARTA (sem título) + foto 20 · fim do traço -->
+  <!-- 12 · A CARTA -->
   <section class="panel"><div class="inner">
-    <span class="ellipsis top"><i>.</i><i>.</i><i>.</i></span>
-    <h2 style="font-size:clamp(28px,7.5vw,42px)">Você é uma pessoa incrível, amorzinha!</h2>
+    <svg class="doodle scribble linkline" width="34" height="48" viewBox="0 0 34 48"><path class="ln" d="M17 2 C 8 12,26 20,17 30 C 10 38,20 42,17 46"/></svg>
+    <h2 style="font-size:clamp(24px,6.6vw,34px);line-height:1.02">Você é uma pessoa incrível, amorzinha!</h2>
     <p class="body long">Eu amo a sua resiliência, leveza pra lidar com a vida, felicidade nas pequenas coisas, atenção aos detalhes. Amo como você é imaginativa e tá sempre me levando junto pros mundinhos da sua cabeça. Amo como, do seu lado, eu me sinto visto, como você é carinhosa, parceira, compreensiva, cuidadosa. Amo nossa comunicação e química. Amo imaginar o futuro e tudo que nos aguarda pra essa nossa vidinha que queremos viver juntos.</p>
-    <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/20_2026-06-20_vestido-branco.jpg" onerror="this.removeAttribute('src')"><div class="cap">a nossa vidinha</div></div>
+    <div class="photo nocap" style="width:min(46%,158px)"><img class="ph" alt="" src="assets/fotos/nos/20_2026-06-20_vestido-branco.jpg" onerror="this.removeAttribute('src')"></div>
   </div></section>
 
-  <!-- 14 · ESSA SEMANA A GENTE CASA -->
+  <!-- 13 · ESSA SEMANA A GENTE CASA -->
   <section class="panel"><div class="inner">
     <h2>Essa semana a gente casa!</h2>
     <p class="body">Damos mais um passo na nossa caminhadinha, eu sei que não é o casamento que você sempre sonhou (ainda), mas não deixa de ser importante e especial. Obrigado por sempre igualar as minhas ideias e loucuras pra estar do seu lado, sempre querendo estar do meu lado ainda mais.</p>
@@ -297,16 +314,16 @@ video.ph{background:#000}
     </svg>
   </div></section>
 
-  <!-- 15 · FINAL · pôr do sol (chegada do traço) -->
+  <!-- 14 · FINAL · pôr do sol -->
   <section class="panel"><div class="inner">
-    <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/15_2026-03-28_por-do-sol-aviao.jpg" onerror="this.removeAttribute('src')"><div class="cap">o nosso pôr do sol</div></div>
+    <div class="photo nocap"><img class="ph" alt="" src="assets/fotos/nos/15_2026-03-28_por-do-sol-aviao.jpg" onerror="this.removeAttribute('src')"></div>
     <h2>Eu te amo, lindinha!</h2>
     <div class="finale">por uma vida de pores do sol juntos
       <svg class="doodle scribble finale-line" width="280" height="28" viewBox="0 0 300 28">
         <path class="ln" d="M6 17 C 60 5, 130 25, 182 13 C 222 4, 262 20, 294 11"/>
       </svg>
     </div>
-    <div class="sub">— seu, Lucas 💛</div>
+    <div class="sub">— seu amorzinho 💛</div>
   </div></section>
 
 </div>
@@ -319,39 +336,35 @@ const track=document.getElementById('track');
 const panels=[...document.querySelectorAll('.panel')];
 const startPanel=document.getElementById('startPanel');
 
-// scribble dash
 document.querySelectorAll('.scribble .ln').forEach(p=>{
   const L=p.getTotalLength(); p.style.strokeDasharray=L; p.style.strokeDashoffset=L;
 });
 
-// dots
 const dots=document.getElementById('dots');
 panels.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i?'':' on');dots.appendChild(d);});
 const dotEls=[...dots.children];
 
-// reveal
 const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }),{root:track,threshold:.5});
 panels.forEach(p=>io.observe(p));
 
 // floating hearts
 const F=document.getElementById('floaters');
 const heartPath='M50 82 C 10 55,8 20,30 14 C 44 10,50 24,50 30 C 50 24,56 10,70 14 C 92 20,90 55,50 82 Z';
-for(let i=0;i<9;i++){
+for(let i=0;i<12;i++){
   const s=document.createElementNS('http://www.w3.org/2000/svg','svg');
   s.setAttribute('viewBox','0 0 100 90');
-  const sz=14+Math.random()*30; s.style.width=sz+'px'; s.style.height=sz+'px';
-  s.style.left=Math.random()*96+'vw'; s.style.top=Math.random()*88+'vh';
+  const sz=13+Math.random()*30; s.style.width=sz+'px'; s.style.height=sz+'px';
+  s.style.left=Math.random()*96+'vw'; s.style.top=Math.random()*90+'vh';
   s.style.animationDuration=(6+Math.random()*7)+'s'; s.style.animationDelay=(-Math.random()*7)+'s';
   s.innerHTML='<path d="'+heartPath+'"/>'; F.appendChild(s);
 }
 
-// traço-moldura
+// traço-moldura: moldura fechada que se desenha do início (Bumble) ao fim
 const trace=document.getElementById('trace');
 const tracePath=document.getElementById('tracePath');
 const traceTip=document.getElementById('traceTip');
 const motifBox=document.getElementById('traceMotifs');
 let traceLen=1, motifs=[];
-// desenhinhos ao longo da moldura, mais ou menos na página que combina
 const motifDefs=[
   {f:1/12,t:'heart'},{f:2/12,t:'cat'},{f:3/12,t:'heart'},{f:4/12,t:'snow'},
   {f:5/12,t:'sun'},{f:6/12,t:'heart'},{f:7/12,t:'star'},{f:8/12,t:'heart'},
@@ -367,13 +380,14 @@ function motifSVG(t){
   return '';
 }
 function buildTrace(){
-  const W=window.innerWidth,H=window.innerHeight,m=16,r=44,xc=W/2,py=H*0.66;
+  const W=window.innerWidth,H=window.innerHeight,m=15,r=42,xc=W/2;
   trace.setAttribute('viewBox',`0 0 ${W} ${H}`);
-  // começa no topo, desce pela lateral e pelo rodapé, e faz um gancho até a frase final
-  const d=`M ${m+r} ${m} L ${W-m-r} ${m} Q ${W-m} ${m} ${W-m} ${m+r}`
-    +` L ${W-m} ${H-m-r} Q ${W-m} ${H-m} ${W-m-r} ${H-m}`
-    +` L ${xc} ${H-m}`
-    +` C ${xc} ${H-m-40}, ${xc+10} ${py+22}, ${xc} ${py}`;
+  // moldura fechada; começa e fecha no centro do rodapé (perto da frase final)
+  const d=`M ${xc} ${H-m}`
+    +` L ${W-m-r} ${H-m} Q ${W-m} ${H-m} ${W-m} ${H-m-r}`
+    +` L ${W-m} ${m+r} Q ${W-m} ${m} ${W-m-r} ${m}`
+    +` L ${m+r} ${m} Q ${m} ${m} ${m} ${m+r}`
+    +` L ${m} ${H-m-r} Q ${m} ${H-m} ${m+r} ${H-m} Z`;
   tracePath.setAttribute('d',d);
   traceLen=tracePath.getTotalLength();
   tracePath.style.strokeDasharray=traceLen;
@@ -412,7 +426,6 @@ function onScroll(){
 track.addEventListener('scroll',onScroll,{passive:true});
 window.addEventListener('resize',()=>{buildTrace();onScroll();});
 
-// arrows / keys
 const step=()=>track.clientWidth;
 document.getElementById('next').onclick=()=>track.scrollBy({left:step(),behavior:'smooth'});
 document.getElementById('prev').onclick=()=>track.scrollBy({left:-step(),behavior:'smooth'});
@@ -421,10 +434,10 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowLeft')track.scrollBy({left:-step(),behavior:'smooth'});
 });
 
-// tema
 const body=document.body, tog=document.getElementById('toggle');
 function setTheme(t){ body.dataset.theme=t;
-  tog.innerHTML = t==='dark' ? '☀️ <span>modo dia</span>' : '🌙 <span>modo noite</span>'; }
+  tog.textContent = t==='dark' ? '☀️' : '🌙';
+  tog.setAttribute('aria-label', t==='dark' ? 'modo dia' : 'modo noite'); }
 setTheme(localStorage.getItem('oi-theme')||'caderninho');
 tog.onclick=()=>{const t=body.dataset.theme==='dark'?'caderninho':'dark';
   setTheme(t); localStorage.setItem('oi-theme',t);};
