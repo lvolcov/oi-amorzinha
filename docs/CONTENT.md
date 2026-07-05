@@ -31,22 +31,35 @@ palavras dele. A estrutura e as fotos já estão montadas em `concepts/index.htm
 
 Ver mapa completo em `PHOTOS.md`.
 
-## Estrutura atual das páginas (livro horizontal)
+## O TRAÇO (conceito do Lucas)
+Uma linha contínua que se desenha **acompanhando a navegação**, correndo pela
+**moldura/laterais da tela** (por isso é mais marcante — não passa por cima do
+conteúdo). **Começa na página do print do Bumble** (pág. 3, "tudo começou aqui")
+e se **completa na última página**, fechando a moldura como uma **linha de
+chegada** da trajetória. Implementado como frame SVG fixo (`#tracePath`), com
+o desenho ligado ao scroll a partir da `#startPanel`, e um coração na ponta.
 
-0. Hero — "oi, amorzinha / uma mensagem minha pra você"
-1. O match (dez/2025) — foto 02 (print da conversa)
-2. Primeiro date — fotos 01 + 05 (duo, o gato)
-3. Segundo date — foto 03 (sítio Sorocaba)
-4. O bilhete na bolsa — foto 04
-5. "você foi pra Lisboa" (transição, doodle)
-6. Budapeste — fotos 07 + 09 (duo)
-7. Portugal — fotos 10 (Algarve) + 17 (Lisboa) (duo)
-8. Madri — **vídeo 12**
-9. O que eu amo em você (1) — fotos 13 + 14 (duo)
-10. O que eu amo em você (2) — fotos 15 + 18 (duo)
-11. Malta — foto 19
-12. Agora / Manchester — foto 20 ("vem pra casa")
-13. Final — foto **21 em destaque** + "é você, sempre / — seu, Lucas"
+## Estrutura atual (13 páginas) — roteiro do Lucas 05/07/2026
+1. **Capa** — "Oi Amorzinha!" / "Tenho um bilhetinho de amor pra você" / foto
+   **21** (nos olhando) / data de hoje (sem "Manchester").
+2. **Que sorte a minha!** — texto de abertura + foto 19 (kissing booth).
+3. **Nosso início / Match enganoso e despretensioso** — print do Bumble (02),
+   **inteiro, sem corte** (`.photo.full`). **Início do traço.**
+4. **Primeiro date** — foto 01 (desci do avião direto pro date; vinho na praça).
+5. **Segundo date** — "O nosso fogo, as vacas noturnas…" fotos 03+05 (sítio+gato)
+   + gracinha cheeky 🔥 ("o resto fica entre a gente").
+6. **Um date após o outro** — fotos 06 + 04 (bilhete).
+7. **"A Europa virou o nosso quintal"** (título) — Budapeste 07+08+09.
+8. Europa — frase "Tem foto nossa que abro só pra derreter…" + 10+17+14.
+9. Europa — **"Xiiii…"** grande em vermelho (piada interna) + foto 15.
+10. Europa — Madri 11+16.
+11. Europa — 13+18 (Aveiro).
+12. Europa — **vídeo 12** + "Eu te amo, e sou muito feliz cada segundo do seu
+    lado…" (reticências animadas → continuam na próxima).
+13. **A carta** (sem título) — "…" no topo + "Você é uma pessoa incrível,
+    amorzinha!" + texto grande + foto 20 + "— seu, Lucas". **Fim do traço.**
+
+Todas as 21 fotos + o vídeo estão no site.
 
 ## Frases que o Lucas curtiu (guardar / reaproveitar)
 
