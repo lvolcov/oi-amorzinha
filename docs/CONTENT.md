@@ -51,15 +51,21 @@ o desenho ligado ao scroll a partir da `#startPanel`, e um coração na ponta.
 6. **Um date após o outro** — fotos 06 + 04 (bilhete).
 7. **"A Europa virou o nosso quintal"** (título) — Budapeste 07+08+09.
 8. Europa — frase "Tem foto nossa que abro só pra derreter…" + 10+17+14.
-9. Europa — **"Xiiii…"** grande em vermelho (piada interna) + foto 15.
+9. Europa — **"Xiiii…"** grande em vermelho (piada interna), só texto + doodle
+   (sem foto).
 10. Europa — Madri 11+16.
 11. Europa — 13+18 (Aveiro).
 12. Europa — **vídeo 12** + "Eu te amo, e sou muito feliz cada segundo do seu
     lado…" (reticências animadas → continuam na próxima).
 13. **A carta** (sem título) — "…" no topo + "Você é uma pessoa incrível,
-    amorzinha!" + texto grande + foto 20 + "— seu, Lucas". **Fim do traço.**
+    amorzinha!" + texto grande + foto 20.
+14. **"Essa semana a gente casa!"** — texto do casamento + doodle.
+15. **Fecho / pôr do sol** — foto **15** + "Eu te amo, lindinha!" + "por uma vida
+    de pores do sol juntos" (com risquinho desenhado) + "— seu, Lucas". **Fim do
+    traço: a moldura fecha completa = linha de chegada.**
 
-Todas as 21 fotos + o vídeo estão no site.
+Todas as 21 fotos + o vídeo estão no site. (Foto 15 saiu do "Xiiii" e virou o
+fecho.)
 
 ## Frases que o Lucas curtiu (guardar / reaproveitar)
 

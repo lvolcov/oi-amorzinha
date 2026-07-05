@@ -104,6 +104,12 @@ video.ph{background:#000}
 .ellipsis i:nth-child(3){animation-delay:.44s}
 @keyframes dot{0%,55%,100%{opacity:.2}28%{opacity:1}}
 .ellipsis.top{display:block;font-family:var(--hand);font-size:52px;margin-bottom:2px}
+/* frase de chegada */
+.finale{font-family:var(--hand);color:var(--accent);font-weight:700;
+  font-size:clamp(26px,7.5vw,40px);line-height:1.08;margin-top:12px}
+.finale-line{margin:0 auto}
+.finale-line .ln{stroke:var(--accent)!important}
+.trace.done #traceTip{animation:beat 1.4s ease-in-out infinite}
 
 /* self-drawing doodles (scribble) */
 .doodle{display:block;margin:16px auto 0;overflow:visible}
@@ -241,10 +247,13 @@ video.ph{background:#000}
     </div>
   </div></section>
 
-  <!-- 9 · EUROPA · "Xiiii..." + foto -->
+  <!-- 9 · EUROPA · "Xiiii..." (piada interna) -->
   <section class="panel"><div class="inner">
     <div class="bigred">Xiiii…</div>
-    <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/15_2026-03-28_por-do-sol-aviao.jpg" onerror="this.removeAttribute('src')"><div class="cap">nós dois</div></div>
+    <svg class="doodle scribble" width="300" height="66" viewBox="0 0 320 70">
+      <path class="ln" d="M8 42 C 40 42,34 20,52 22 C 70 24,60 50,92 42 C 118 36,135 44,150 44 M174 44 C 188 44,205 36,232 42 C 262 50,252 22,270 22 C 288 20,282 42,312 42"/>
+      <path class="hrt" d="M162 54 C 150 44,146 32,154 28 C 159 25,162 30,162 33 C 162 30,165 25,170 28 C 178 32,174 44,162 54 Z"/>
+    </svg>
   </div></section>
 
   <!-- 10 · EUROPA · Madri -->
@@ -275,6 +284,28 @@ video.ph{background:#000}
     <h2 style="font-size:clamp(28px,7.5vw,42px)">Você é uma pessoa incrível, amorzinha!</h2>
     <p class="body long">Eu amo a sua resiliência, a leveza pra lidar com a vida, a felicidade nas pequenas coisas, a atenção aos detalhes. Amo como você é imaginativa e tá sempre me levando junto pros mundinhos da sua cabeça. Amo como, do seu lado, eu me sinto visto; como você é carinhosa, parceira, compreensiva e cuidadosa. Amo a nossa comunicação e a nossa química. Amo imaginar o futuro e tudo que espera essa nossa vidinha que a gente quer viver junto.</p>
     <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/20_2026-06-20_vestido-branco.jpg" onerror="this.removeAttribute('src')"><div class="cap">a nossa vidinha</div></div>
+  </div></section>
+
+  <!-- 14 · ESSA SEMANA A GENTE CASA -->
+  <section class="panel"><div class="inner">
+    <div class="kicker">e daqui a pouquinho…</div>
+    <h2>Essa semana a gente casa!</h2>
+    <p class="body">Damos mais um passo na nossa caminhadinha. Eu sei que ainda não é o casamento que você sempre sonhou, mas não deixa de ser importante e especial. Obrigado por sempre igualar as minhas ideias e loucuras pra estar do meu lado — e por querer estar ainda mais.</p>
+    <svg class="doodle scribble" width="300" height="66" viewBox="0 0 320 70">
+      <path class="ln" d="M8 42 C 40 42,34 20,52 22 C 70 24,60 50,92 42 C 118 36,135 44,150 44 M174 44 C 188 44,205 36,232 42 C 262 50,252 22,270 22 C 288 20,282 42,312 42"/>
+      <path class="hrt" d="M162 54 C 150 44,146 32,154 28 C 159 25,162 30,162 33 C 162 30,165 25,170 28 C 178 32,174 44,162 54 Z"/>
+    </svg>
+  </div></section>
+
+  <!-- 15 · FINAL · pôr do sol (chegada do traço) -->
+  <section class="panel"><div class="inner">
+    <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/15_2026-03-28_por-do-sol-aviao.jpg" onerror="this.removeAttribute('src')"><div class="cap">o nosso pôr do sol</div></div>
+    <h2>Eu te amo, lindinha!</h2>
+    <div class="finale">por uma vida de pores do sol juntos
+      <svg class="doodle scribble finale-line" width="280" height="28" viewBox="0 0 300 28">
+        <path class="ln" d="M6 17 C 60 5, 130 25, 182 13 C 222 4, 262 20, 294 11"/>
+      </svg>
+    </div>
     <div class="sub">— seu, Lucas 💛</div>
   </div></section>
 
@@ -344,6 +375,7 @@ function onScroll(){
   const tp=tracePath.getPointAtLength(drawn);
   traceTip.setAttribute('transform',`translate(${tp.x} ${tp.y})`);
   traceTip.style.opacity = frac>0.003 ? 1 : 0;
+  trace.classList.toggle('done', frac>=0.999);
   if(track.scrollLeft>40) hint.style.opacity='0';
   const idx=Math.round(track.scrollLeft/cw);
   dotEls.forEach((d,i)=>d.classList.toggle('on',i===idx));
