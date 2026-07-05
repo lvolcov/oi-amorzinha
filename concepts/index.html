@@ -429,9 +429,17 @@ function buildTrace(){
   let d=`M ${(xc-60).toFixed(1)} ${B} `;
   d+=wavy(xc-60,B,L+34,B,0,-1,2);            // rodapé esquerdo, do meio até o canto
   d+=`Q ${L} ${B} ${L} ${B-34} `;            // canto inf-esq
-  d+=wavy(L,B-34,L,T+34,1,0,3);              // sobe pela esquerda
-  d+=`Q ${L} ${T} ${L+34} ${T} `;            // canto sup-esq
-  d+=wavy(L+34,T,R-34,T,0,1,3);              // topo
+  const BY=T+42, BX=L+190;                   // desvia por baixo do "oi amorzinha!" (canto sup-esq)
+  if(BX+34<R-34){
+    d+=wavy(L,B-34,L,BY+34,1,0,3);            // sobe pela esquerda até a altura do desvio
+    d+=`Q ${L} ${BY} ${L+34} ${BY} `;         // curva pra baixo da logo
+    d+=wavy(L+34,BY,BX,BY,0,1,1);             // passa por baixo da logo
+    d+=`Q ${BX} ${T} ${(BX+34).toFixed(1)} ${T} `; // sobe de volta ao nível do topo
+  }else{
+    d+=wavy(L,B-34,L,T+34,1,0,3);            // sobe pela esquerda
+    d+=`Q ${L} ${T} ${L+34} ${T} `;          // canto sup-esq
+  }
+  d+=wavy(BX+34<R-34?BX+34:L+34,T,R-34,T,0,1,3); // topo
   d+=`Q ${R} ${T} ${R} ${T+34} `;           // canto sup-dir
   d+=wavy(R,T+34,R,B-30,-1,0,3);            // desce pela direita
   d+=`Q ${R} ${B} ${R-34} ${B} `;           // canto inf-dir
