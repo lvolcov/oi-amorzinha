@@ -403,9 +403,9 @@ function buildTrace(){
   const sg=document.getElementById('finaleSig');
   // sempre no centro horizontal (xc): o painel final está fora da tela à direita
   // no carregamento, então a posição horizontal medida não vale — só a vertical.
-  const hx=xc; let sigBottom=H*0.66;
+  const hx=xc; let sigBottom=H*0.74;
   if(sg){const r=sg.getBoundingClientRect();
-    if(r.height>1) sigBottom=Math.max(H*0.5,Math.min(r.bottom,H*0.72));}
+    if(r.height>1) sigBottom=Math.max(H*0.5,Math.min(r.bottom,H*0.82));}
   const hs=2.6;                    // escala do coração
   const hcy=sigBottom+14+8.5*hs;   // centro vertical do coração
   const tipY=hcy+9*hs;             // ponta inferior (onde o traço fecha o coração)
@@ -426,14 +426,16 @@ function buildTrace(){
       +`C ${(cx+0.5*s).toFixed(1)} ${(cy-6*s).toFixed(1)}, ${(cx+3*s).toFixed(1)} ${(cy-8.5*s).toFixed(1)}, ${(cx+6*s).toFixed(1)} ${(cy-7*s).toFixed(1)} `
       +`C ${(cx+10*s).toFixed(1)} ${(cy-5*s).toFixed(1)}, ${(cx+9*s).toFixed(1)} ${(cy+2*s).toFixed(1)}, ${cx.toFixed(1)} ${(cy+9*s).toFixed(1)} `;
   }
-  let d=`M ${L} ${(B-30).toFixed(1)} `;
-  d+=wavy(L,B-30,L,T+34,1,0,3);              // sobe pela esquerda
+  let d=`M ${(xc-60).toFixed(1)} ${B} `;
+  d+=wavy(xc-60,B,L+34,B,0,-1,2);            // rodapé esquerdo, do meio até o canto
+  d+=`Q ${L} ${B} ${L} ${B-34} `;            // canto inf-esq
+  d+=wavy(L,B-34,L,T+34,1,0,3);              // sobe pela esquerda
   d+=`Q ${L} ${T} ${L+34} ${T} `;            // canto sup-esq
   d+=wavy(L+34,T,R-34,T,0,1,3);              // topo
   d+=`Q ${R} ${T} ${R} ${T+34} `;           // canto sup-dir
   d+=wavy(R,T+34,R,B-30,-1,0,3);            // desce pela direita
   d+=`Q ${R} ${B} ${R-34} ${B} `;           // canto inf-dir
-  d+=wavy(R-34,B,xc+60,B,0,-1,2);           // rodapé até perto do centro
+  d+=wavy(R-34,B,xc+60,B,0,-1,2);           // rodapé direito até perto do centro
   // sobe do rodapé até a ponta do coração e desenha o coração
   d+=`C ${(xc+30).toFixed(1)} ${(B-4).toFixed(1)}, ${(hx+34).toFixed(1)} ${(tipY+34).toFixed(1)}, ${hx.toFixed(1)} ${tipY.toFixed(1)} `;
   d+=heart(hx,hcy,hs);
