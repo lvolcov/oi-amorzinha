@@ -171,7 +171,7 @@ video.ph{background:#000}
 .top{position:fixed;top:0;left:0;right:0;z-index:8;display:flex;
   justify-content:space-between;align-items:center;padding:9px 12px;
   padding-top:max(9px,env(safe-area-inset-top))}
-.brand{font-family:var(--hand);font-size:21px;color:var(--ink);opacity:.85}
+.brand{font-family:var(--hand);font-size:21px;color:var(--ink);opacity:.85;margin:22px 0 0 32px}
 .toggle{pointer-events:auto;border:1.6px solid var(--line);background:transparent;
   border-radius:50%;width:38px;height:38px;padding:0;cursor:pointer;
   display:flex;align-items:center;justify-content:center;font-size:17px;line-height:1}
@@ -331,7 +331,7 @@ video.ph{background:#000}
   <section class="panel"><div class="inner">
     <div class="photo nocap"><img class="ph" alt="" src="assets/fotos/nos/15_2026-03-28_por-do-sol-aviao.jpg" onerror="this.removeAttribute('src')"></div>
     <h2>Eu te amo, lindinha!</h2>
-    <div class="finale" id="finalePhrase">por uma vida de pores do sol juntos</div>
+    <div class="finale" id="finalePhrase">por uma vida de eternos pores do sol juntinhos</div>
     <div class="sub" id="finaleSig" style="margin-top:24px">— seu amorzinho ❤️</div>
   </div></section>
 
@@ -385,7 +385,7 @@ let traceLen=1, motifs=[];
 const motifDefs=[
   {f:0.05,t:'heart'},{f:0.14,t:'cat'},{f:0.22,t:'heart'},{f:0.30,t:'snow'},
   {f:0.37,t:'heart'},{f:0.45,t:'sun'},{f:0.53,t:'heart'},{f:0.61,t:'star'},
-  {f:0.69,t:'heart'},{f:0.77,t:'heart'},{f:0.85,t:'rings'},{f:0.93,t:'heart'}
+  {f:0.69,t:'heart'},{f:0.77,t:'heart'},{f:0.85,t:'rings'}
 ];
 function motifSVG(t){
   if(t==='heart') return '<path class="f" d="M0 4 C -7 -2,-4 -8,0 -3 C 4 -8,7 -2,0 4 Z"/>';
@@ -429,14 +429,9 @@ function buildTrace(){
   let d=`M ${(xc-60).toFixed(1)} ${B} `;
   d+=wavy(xc-60,B,L+34,B,0,-1,2);            // rodapé esquerdo, do meio até o canto
   d+=`Q ${L} ${B} ${L} ${B-34} `;            // canto inf-esq
-  const BY=T+34, BX=L+140;                   // desvia sutilmente por baixo do "oi amorzinha!"
   d+=wavy(L,B-34,L,T+34,1,0,3);              // sobe pela esquerda
-  if(BX<R-34){
-    d+=`C ${L} ${BY.toFixed(1)}, ${(BX-40).toFixed(1)} ${BY.toFixed(1)}, ${BX} ${T} `; // curva única e suave por baixo da logo
-  }else{
-    d+=`Q ${L} ${T} ${L+34} ${T} `;          // canto sup-esq
-  }
-  d+=wavy(BX<R-34?BX:L+34,T,R-34,T,0,1,3);   // topo
+  d+=`Q ${L} ${T} ${L+34} ${T} `;            // canto sup-esq (o "oi amorzinha!" fica recuado pra dentro dele)
+  d+=wavy(L+34,T,R-34,T,0,1,3);              // topo
   d+=`Q ${R} ${T} ${R} ${T+34} `;           // canto sup-dir
   d+=wavy(R,T+34,R,B-30,-1,0,3);            // desce pela direita
   d+=`Q ${R} ${B} ${R-34} ${B} `;           // canto inf-dir
