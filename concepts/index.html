@@ -401,9 +401,11 @@ function buildTrace(){
   const L=18,R=W-18,T=18,B=H-18,xc=W/2,A=11;
   // posiciona o coração final logo abaixo de "seu amorzinho" (mede a posição real)
   const sg=document.getElementById('finaleSig');
-  let hx=xc, sigBottom=H*0.74;
+  // sempre no centro horizontal (xc): o painel final está fora da tela à direita
+  // no carregamento, então a posição horizontal medida não vale — só a vertical.
+  const hx=xc; let sigBottom=H*0.66;
   if(sg){const r=sg.getBoundingClientRect();
-    if(r.height>1){ hx=r.left+r.width/2; sigBottom=r.bottom; }}
+    if(r.height>1) sigBottom=Math.max(H*0.5,Math.min(r.bottom,H*0.72));}
   const hs=2.6;                    // escala do coração
   const hcy=sigBottom+14+8.5*hs;   // centro vertical do coração
   const tipY=hcy+9*hs;             // ponta inferior (onde o traço fecha o coração)
