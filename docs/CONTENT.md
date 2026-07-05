@@ -48,6 +48,14 @@ Ver mapa completo em `PHOTOS.md`.
 12. Agora / Manchester — foto 20 ("vem pra casa")
 13. Final — foto **21 em destaque** + "é você, sempre / — seu, Lucas"
 
+## Frases que o Lucas curtiu (guardar / reaproveitar)
+
+Do rascunho, ele quis guardar estas para reusar no texto final:
+- "Essa semana eu caso com você. Não pela papelada — mas porque eu quero você
+  aqui, comigo, todo dia."
+- "Tem foto nossa que eu abro só pra lembrar da sorte que eu tive."
+- "A Europa virou o nosso quintal."
+
 ## Pendências pro Lucas (amanhã)
 
 - Reescrever os textos de cada página com as palavras dele.

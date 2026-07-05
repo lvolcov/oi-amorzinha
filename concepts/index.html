@@ -100,6 +100,21 @@ video.ph{background:#000}
 .panel.in .scribble .hrt{transform:scale(1);opacity:1}
 .scribble .hrt{animation:beat 1.5s ease-in-out infinite 1.5s}
 
+/* três fotos espalhadas numa página */
+.trio{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;margin-top:18px}
+.trio .photo{width:min(40%,150px);margin:0;padding:7px 7px 26px}
+.trio .photo .cap{font-size:15px;bottom:6px}
+.trio .photo:nth-child(1){transform:rotate(-5deg);z-index:3}
+.trio .photo:nth-child(2){transform:rotate(4deg);margin-left:-18px;margin-top:16px;z-index:2}
+.trio .photo:nth-child(3){transform:rotate(-2deg);margin-top:4px;z-index:4}
+
+/* traço contínuo que se desenha acompanhando a navegação */
+.trace{position:fixed;inset:0;z-index:1;pointer-events:none;width:100%;height:100%}
+.trace #tracePath{fill:none;stroke:var(--accent);stroke-width:3;
+  stroke-linecap:round;stroke-linejoin:round;opacity:.26;
+  transition:stroke-dashoffset .18s linear}
+.trace #traceTip{fill:var(--accent);opacity:.85;transition:transform .18s linear}
+
 /* journey line at bottom */
 .journey{position:fixed;left:0;right:0;bottom:46px;height:40px;z-index:5;
   pointer-events:none;padding:0 26px}
@@ -137,6 +152,11 @@ video.ph{background:#000}
 <body data-theme="caderninho">
 
 <div class="floaters" id="floaters"></div>
+
+<svg class="trace" id="trace" viewBox="0 0 460 1000" preserveAspectRatio="xMidYMid slice">
+  <path id="tracePath"></path>
+  <path id="traceTip" d="M0 6 C -9 -1,-6 -9,0 -4 C 6 -9,9 -1,0 6 Z"></path>
+</svg>
 
 <div class="top">
   <div class="brand">oi amorzinha</div>
@@ -210,8 +230,9 @@ video.ph{background:#000}
     <div class="kicker">janeiro · a primeira viagem</div>
     <h2>Budapeste</h2>
     <p class="body">A nossa primeira de muitas. Frio lá fora, a gente bem coladinho.</p>
-    <div class="duo">
+    <div class="trio">
       <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/07_2026-01-17_budapeste-parlamento.jpg" onerror="this.removeAttribute('src')"><div class="cap">✈ Budapeste</div></div>
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/08_2026-01-17_budapeste-cerveja.jpg" onerror="this.removeAttribute('src')"><div class="cap">saúde!</div></div>
       <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/09_2026-01-17_budapeste-praca.jpg" onerror="this.removeAttribute('src')"><div class="cap">na neve</div></div>
     </div>
   </div></section>
@@ -232,7 +253,11 @@ video.ph{background:#000}
     <div class="kicker">março · Madri</div>
     <h2>Madri</h2>
     <p class="body">Mais uma cidade na lista, mais um monte de foto boba e feliz.</p>
-    <div class="photo"><video class="ph" src="assets/fotos/lugares/12_2026-03-07_madri.mp4" muted loop playsinline autoplay preload="metadata"></video><div class="cap">nós dois por lá</div></div>
+    <div class="trio">
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/11_2026-03-07_espelho-tulipas.jpg" onerror="this.removeAttribute('src')"><div class="cap">tulipas</div></div>
+      <div class="photo"><video class="ph" src="assets/fotos/lugares/12_2026-03-07_madri.mp4" muted loop playsinline autoplay preload="metadata"></video><div class="cap">nós dois</div></div>
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/lugares/16_2026-04-19_jantar-amigos.jpg" onerror="this.removeAttribute('src')"><div class="cap">com a galera</div></div>
+    </div>
   </div></section>
 
   <!-- 9 · O QUE AMO EM VOCÊ (1) -->
@@ -240,9 +265,10 @@ video.ph{background:#000}
     <div class="kicker">e no meio de tudo isso</div>
     <h2>o que eu amo em você</h2>
     <p class="body">O seu jeito, o seu riso fácil, a coragem de mudar a vida inteira por nós.</p>
-    <div class="duo">
+    <div class="trio">
       <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/13_2026-03-10_noite-teto.jpg" onerror="this.removeAttribute('src')"><div class="cap">você</div></div>
       <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/14_2026-03-25_cabine-fotos.jpg" onerror="this.removeAttribute('src')"><div class="cap">a gente</div></div>
+      <div class="photo"><img class="ph" alt="" src="assets/fotos/nos/06_2026-01-06_espelho-noite.jpg" onerror="this.removeAttribute('src')"><div class="cap">nós</div></div>
     </div>
   </div></section>
 
@@ -321,6 +347,29 @@ for(let i=0;i<9;i++){
   s.innerHTML='<path d="'+heartPath+'"/>'; F.appendChild(s);
 }
 
+// traço contínuo que se desenha conforme navega as páginas
+const tracePath=document.getElementById('tracePath');
+const traceTip=document.getElementById('traceTip');
+(function buildTrace(){
+  const pts=[[70,120],[380,215],[95,330],[375,455],[110,585],[380,700],[130,815],[295,905]];
+  const motif={1:'heart',2:'loop',3:'heart',4:'loop',5:'heart',6:'loop'};
+  let d=`M ${pts[0][0]} ${pts[0][1]}`;
+  for(let i=1;i<pts.length;i++){
+    const [x0,y0]=pts[i-1],[x1,y1]=pts[i]; const my=(y0+y1)/2;
+    d+=` C ${x0} ${my}, ${x1} ${my}, ${x1} ${y1}`;
+    const m=motif[i], cx=x1, cy=y1;
+    if(m==='heart'){const s=26;
+      d+=` C ${cx-s} ${cy-s*0.5}, ${cx-s*0.6} ${cy-s*1.25}, ${cx} ${cy-s*0.5}`+
+         ` C ${cx+s*0.6} ${cy-s*1.25}, ${cx+s} ${cy-s*0.5}, ${cx} ${cy}`;}
+    else if(m==='loop'){const r=22;
+      d+=` C ${cx+r} ${cy-r}, ${cx+r} ${cy+r}, ${cx} ${cy}`;}
+  }
+  tracePath.setAttribute('d',d);
+})();
+const traceLen=tracePath.getTotalLength();
+tracePath.style.strokeDasharray=traceLen;
+tracePath.style.strokeDashoffset=traceLen;
+
 const jfill=document.getElementById('jfill'), jheart=document.getElementById('jheart');
 const hint=document.getElementById('hint');
 function onScroll(){
@@ -328,6 +377,10 @@ function onScroll(){
   const p=max>0?track.scrollLeft/max:0;
   jfill.style.width=(p*100)+'%';
   jheart.style.left=(p*100)+'%';
+  const drawn=Math.max(1,traceLen*p);
+  tracePath.style.strokeDashoffset=(traceLen-drawn);
+  const tp=tracePath.getPointAtLength(drawn);
+  traceTip.setAttribute('transform',`translate(${tp.x} ${tp.y})`);
   if(track.scrollLeft>40) hint.style.opacity='0';
   const idx=Math.round(track.scrollLeft/track.clientWidth);
   dotEls.forEach((d,i)=>d.classList.toggle('on',i===idx));
