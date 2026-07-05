@@ -399,22 +399,30 @@ function motifSVG(t){
 function buildTrace(){
   const W=window.innerWidth,H=window.innerHeight;
   const L=18,R=W-18,T=18,B=H-18,xc=W/2,A=11;
-  // alinha o sublinhado logo abaixo da frase final (mede a posição real)
-  const fp=document.getElementById('finalePhrase');
-  let py=H*0.73;
-  if(fp){const r=fp.getBoundingClientRect();
-    const sg=document.getElementById('finaleSig');
-    const sgt=sg?sg.getBoundingClientRect().top:r.bottom+30;
-    if(r.height>1) py=Math.min(r.bottom+14, sgt-12);}
+  // posiciona o coração final logo abaixo de "seu amorzinho" (mede a posição real)
+  const sg=document.getElementById('finaleSig');
+  let hx=xc, sigBottom=H*0.74;
+  if(sg){const r=sg.getBoundingClientRect();
+    if(r.height>1){ hx=r.left+r.width/2; sigBottom=r.bottom; }}
+  const hs=2.6;                    // escala do coração
+  const hcy=sigBottom+14+8.5*hs;   // centro vertical do coração
+  const tipY=hcy+9*hs;             // ponta inferior (onde o traço fecha o coração)
   trace.setAttribute('viewBox',`0 0 ${W} ${H}`);
   // contorno que serpenteia SUAVE pela borda (ondas leves, sem laços) e
-  // termina desenhando o sublinhado da frase final
+  // termina desenhando um CORAÇÃO abaixo de "seu amorzinho"
   function wavy(x0,y0,x1,y1,nx,ny,waves){
     let s='';const N=Math.max(16,waves*10);
     for(let i=1;i<=N;i++){const t=i/N,
       bx=x0+(x1-x0)*t, by=y0+(y1-y0)*t, off=Math.sin(t*Math.PI*waves)*A;
       s+=`L ${(bx+nx*off).toFixed(1)} ${(by+ny*off).toFixed(1)} `;}
     return s;
+  }
+  // desenha o coração a partir da ponta inferior (sem 'M', continua o traço)
+  function heart(cx,cy,s){
+    return `C ${(cx-9*s).toFixed(1)} ${(cy+2*s).toFixed(1)}, ${(cx-10*s).toFixed(1)} ${(cy-5*s).toFixed(1)}, ${(cx-6*s).toFixed(1)} ${(cy-7*s).toFixed(1)} `
+      +`C ${(cx-3*s).toFixed(1)} ${(cy-8.5*s).toFixed(1)}, ${(cx-0.5*s).toFixed(1)} ${(cy-6*s).toFixed(1)}, ${cx.toFixed(1)} ${(cy-4.5*s).toFixed(1)} `
+      +`C ${(cx+0.5*s).toFixed(1)} ${(cy-6*s).toFixed(1)}, ${(cx+3*s).toFixed(1)} ${(cy-8.5*s).toFixed(1)}, ${(cx+6*s).toFixed(1)} ${(cy-7*s).toFixed(1)} `
+      +`C ${(cx+10*s).toFixed(1)} ${(cy-5*s).toFixed(1)}, ${(cx+9*s).toFixed(1)} ${(cy+2*s).toFixed(1)}, ${cx.toFixed(1)} ${(cy+9*s).toFixed(1)} `;
   }
   let d=`M ${L} ${(B-30).toFixed(1)} `;
   d+=wavy(L,B-30,L,T+34,1,0,3);              // sobe pela esquerda
@@ -423,9 +431,10 @@ function buildTrace(){
   d+=`Q ${R} ${T} ${R} ${T+34} `;           // canto sup-dir
   d+=wavy(R,T+34,R,B-30,-1,0,3);            // desce pela direita
   d+=`Q ${R} ${B} ${R-34} ${B} `;           // canto inf-dir
-  d+=wavy(R-34,B,xc+72,B,0,-1,2);           // rodapé até perto do centro
-  d+=`C ${xc+36} ${(B-6).toFixed(1)}, ${xc+94} ${(py+16).toFixed(1)}, ${xc+72} ${py.toFixed(1)} `;
-  d+=`Q ${xc} ${(py-5).toFixed(1)} ${xc-72} ${py.toFixed(1)} `;  // sublinhado (leve curva)
+  d+=wavy(R-34,B,xc+60,B,0,-1,2);           // rodapé até perto do centro
+  // sobe do rodapé até a ponta do coração e desenha o coração
+  d+=`C ${(xc+30).toFixed(1)} ${(B-4).toFixed(1)}, ${(hx+34).toFixed(1)} ${(tipY+34).toFixed(1)}, ${hx.toFixed(1)} ${tipY.toFixed(1)} `;
+  d+=heart(hx,hcy,hs);
   tracePath.setAttribute('d',d);
   traceLen=tracePath.getTotalLength();
   tracePath.style.strokeDasharray=traceLen;
