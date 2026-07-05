@@ -58,8 +58,10 @@ p.body{font-size:17px;max-width:34ch;margin:0 auto}
   box-shadow:0 10px 26px rgba(0,0,0,.16);margin:22px auto 0;position:relative;
   width:min(84%,300px);transform:rotate(-2deg)}
 .photo:nth-child(even){transform:rotate(2deg)}
-.photo .ph{display:block;width:100%;height:180px;border-radius:2px;
-  object-fit:cover;background:linear-gradient(135deg,var(--accent2),var(--accent));filter:saturate(.92)}
+.photo .ph{display:block;width:100%;aspect-ratio:3/4;border-radius:2px;
+  object-fit:cover;object-position:center;
+  background:linear-gradient(135deg,var(--accent2),var(--accent))}
+.photo{width:min(74%,270px)}
 .photo .cap{font-family:var(--hand);font-size:21px;color:var(--ink);
   position:absolute;left:0;right:0;bottom:10px}
 .photo::before{content:"";position:absolute;top:-12px;left:50%;width:90px;height:24px;
@@ -143,8 +145,8 @@ p.body{font-size:17px;max-width:34ch;margin:0 auto}
 <div class="track" id="track">
 
   <section class="panel"><div class="inner">
-    <h1>Lucas<span class="amp"> &amp; </span>Talita</h1>
-    <div class="sub">a nossa história, página por página</div>
+    <h1>oi,<br>amorzinha</h1>
+    <div class="sub">uma mensagem minha pra você</div>
     <svg class="doodle scribble" width="300" height="66" viewBox="0 0 320 70">
       <path class="ln" d="M8 42 C 40 42,34 20,52 22 C 70 24,60 50,92 42 C 118 36,135 44,150 44 M174 44 C 188 44,205 36,232 42 C 262 50,252 22,270 22 C 288 20,282 42,312 42"/>
       <path class="hrt" d="M162 54 C 150 44,146 32,154 28 C 159 25,162 30,162 33 C 162 30,165 25,170 28 C 178 32,174 44,162 54 Z"/>
@@ -153,37 +155,37 @@ p.body{font-size:17px;max-width:34ch;margin:0 auto}
   </div></section>
 
   <section class="panel"><div class="inner">
-    <div class="kicker">página um</div>
-    <h2>o nosso início</h2>
-    <p class="body">Um match no Bumble e umas conversas que não queriam acabar.</p>
-    <svg class="doodle ink" width="160" height="46" viewBox="0 0 160 46"><path d="M8 34 C 34 10,74 10,96 30 M96 30 l-13 -3 M96 30 l-3 -13"/></svg>
+    <div class="kicker">onde tudo começou</div>
+    <h2>você mandou primeiro</h2>
+    <p class="body">Foi você quem chegou: “oi, bom dia”. Eu não fazia ideia de que aquela mensagem ia mudar a minha vida inteira.</p>
+    <div class="photo"><img class="ph" alt="" src="assets/fotos/02_2025-12-23_conversa-primeira.jpg" onerror="this.removeAttribute('src')"><div class="cap">o nosso primeiro “oi”</div></div>
   </div></section>
 
   <section class="panel"><div class="inner">
-    <div class="kicker">página dois</div>
-    <h2>o primeiro date</h2>
-    <p class="body">O friozinho na barriga, e aquele papo que rendeu a noite toda.</p>
-    <div class="photo"><img class="ph" alt="" src="assets/fotos/primeiro-date.jpg" onerror="this.removeAttribute('src')"><div class="cap">nós dois, dia um</div></div>
+    <div class="kicker">o primeiro date</div>
+    <h2>o friozinho</h2>
+    <p class="body">Aquele frio que você diz que ama — e eu, com um friozinho diferente na barriga, só de estar do seu lado.</p>
+    <div class="photo"><img class="ph" alt="" src="assets/fotos/01_2025-12-18_selfie-frio.jpg" onerror="this.removeAttribute('src')"><div class="cap">eu e você, no comecinho</div></div>
   </div></section>
 
   <section class="panel"><div class="inner">
-    <div class="kicker">página três</div>
-    <h2>o segundo date</h2>
-    <p class="body">Foi aqui que a gente se conheceu de verdade.</p>
-    <svg class="doodle heartbeat" width="110" height="100" viewBox="0 0 100 90"><path d="M50 82 C 10 55,8 20,30 14 C 44 10,50 24,50 30 C 50 24,56 10,70 14 C 92 20,90 55,50 82 Z"/></svg>
+    <div class="kicker">o segundo date</div>
+    <h2>era você</h2>
+    <p class="body">Foi aí que eu entendi. Não era acaso, não era paixão de app. Era você — e eu já não queria outro lugar no mundo.</p>
+    <div class="photo"><img class="ph" alt="" src="assets/fotos/06_2026-01-06_espelho-noite.jpg" onerror="this.removeAttribute('src')"><div class="cap">a gente, sem querer ir embora</div></div>
   </div></section>
 
   <section class="panel"><div class="inner">
-    <div class="kicker">página quatro</div>
+    <div class="kicker">a primeira viagem</div>
     <h2>Budapeste</h2>
-    <p class="body">Na semana seguinte a gente já marcou a primeira viagem. Corajosos — e deu certíssimo.</p>
-    <div class="photo"><img class="ph" alt="" src="assets/fotos/budapeste.jpg" onerror="this.removeAttribute('src')"><div class="cap">✈ nossa primeira viagem</div></div>
+    <p class="body">Na semana seguinte eu já queria te levar pro mundo. E a gente foi. Corajosos, apaixonados — e certíssimos.</p>
+    <div class="photo"><img class="ph" alt="" src="assets/fotos/07_2026-01-17_budapeste-parlamento.jpg" onerror="this.removeAttribute('src')"><div class="cap">✈ a nossa primeira de muitas</div></div>
   </div></section>
 
   <section class="panel"><div class="inner">
-    <div class="kicker">página cinco</div>
-    <h2>Portugal</h2>
-    <p class="body">Mais um lugar, mais um pedaço nosso no mapa.</p>
+    <div class="kicker">e a gente não parou</div>
+    <h2>por aí, com você</h2>
+    <p class="body">Cada lugar novo virou desculpa pra te ver rir mais um pouco.</p>
     <svg class="doodle scribble" width="300" height="66" viewBox="0 0 320 70">
       <path class="ln" d="M8 42 C 40 42,34 20,52 22 C 70 24,60 50,92 42 C 118 36,135 44,150 44 M174 44 C 188 44,205 36,232 42 C 262 50,252 22,270 22 C 288 20,282 42,312 42"/>
       <path class="hrt" d="M162 54 C 150 44,146 32,154 28 C 159 25,162 30,162 33 C 162 30,165 25,170 28 C 178 32,174 44,162 54 Z"/>
@@ -191,23 +193,23 @@ p.body{font-size:17px;max-width:34ch;margin:0 auto}
   </div></section>
 
   <section class="panel"><div class="inner">
-    <div class="kicker">página seis</div>
+    <div class="kicker">o seu aniversário</div>
     <h2>Madri</h2>
-    <p class="body">O aniversário dela, comigo. Eu não trocaria por nada.</p>
-    <svg class="doodle" width="140" height="60" viewBox="0 0 140 60"><path d="M118 18 l4 8 l9 1 l-6 6 l2 9 l-8 -4 l-8 4 l2 -9 l-6 -6 l9 -1 z"/><path d="M10 42 C 30 22,50 22,60 40 C 68 22,90 22,100 40"/></svg>
+    <p class="body">No seu dia, o presente era eu poder estar ali, do seu lado. Sempre vai ser.</p>
+    <div class="photo"><img class="ph" alt="" src="assets/fotos/21_2026-06-23_predio-verao.jpg" onerror="this.removeAttribute('src')"><div class="cap">o seu dia, comigo</div></div>
   </div></section>
 
   <section class="panel"><div class="inner">
-    <div class="kicker">e assim vai…</div>
-    <h2>a vida em Manchester</h2>
-    <p class="body">Tantos momentos que ainda cabem aqui — e agora, o nosso lar.</p>
-    <svg class="doodle heartbeat" width="100" height="92" viewBox="0 0 100 90"><path d="M50 82 C 10 55,8 20,30 14 C 44 10,50 24,50 30 C 50 24,56 10,70 14 C 92 20,90 55,50 82 Z"/></svg>
+    <div class="kicker">e agora</div>
+    <h2>vem pra casa</h2>
+    <p class="body">Eu caso com você essa semana pra começar a parte mais importante: a nossa vida, aqui, todo dia. Vem.</p>
+    <div class="photo"><img class="ph" alt="" src="assets/fotos/20_2026-06-20_vestido-branco.jpg" onerror="this.removeAttribute('src')"><div class="cap">o nosso próximo capítulo</div></div>
   </div></section>
 
   <section class="panel"><div class="inner">
     <svg class="doodle heartbeat" width="130" height="120" viewBox="0 0 100 90"><path d="M50 82 C 10 55,8 20,30 14 C 44 10,50 24,50 30 C 50 24,56 10,70 14 C 92 20,90 55,50 82 Z"/></svg>
     <h2>pra sempre</h2>
-    <div class="sub">— Lucas &amp; Talita</div>
+    <div class="sub">— seu, Lucas</div>
   </div></section>
 
 </div>

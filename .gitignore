@@ -13,3 +13,9 @@ dist/
 # temporários
 *.log
 tmp/
+
+# fotos originais e material bruto (pesados; ficam só no servidor)
+/*.zip
+/*.jpg
+assets/originais/
+concepts/assets/fotos/*.mp4
